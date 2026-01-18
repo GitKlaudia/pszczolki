@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles/styles.css" rel="stylesheet">
-    <title>B-Movie</title>
+    <title>B-Movie-Logowanie</title>
 </head>
-<body>
-    <div id="loginWrapper">
+<body class="loginPageBody"> <div id="loginWrapper">
         <div id="appLogo"></div>
-        <input id="loginInput" type="text" placeholder="Login">
-        <input id="passwordInput" type="text" placeholder="Hasło">
-        <button id="loginBtn">Zaloguj</button>
-        <button id="backBtn">Powrót</button>
+
+        <input id="loginInput" type="text" placeholder="Login" autocomplete="username">
+        <input id="passwordInput" type="password" placeholder="Hasło" autocomplete="current-password">
+        <div class="loginButtonsRow">
+            <button id="loginBtn" type="submit">Zaloguj</button>
+            <button id="backBtn" type="button">Powrót</button>
+        </div>
     </div>
 </body>
 </html>
