@@ -394,7 +394,8 @@ INSERT INTO `produkcje_rezyserow` (`id`, `typ_tresci`, `id_tresci`, `id_rezysera
 (21, 'serial', 7, 21),
 (22, 'serial', 8, 22),
 (23, 'serial', 9, 23),
-(24, 'serial', 10, 24);
+(24, 'serial', 10, 24),
+(25, 'film', 10, 8);
 
 -- --------------------------------------------------------
 
