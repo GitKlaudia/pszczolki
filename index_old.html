@@ -1,9 +1,3 @@
-<?php
-require_once 'functions.php';
-$filmy = getAllMovies();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,36 +43,43 @@ $filmy = getAllMovies();
             <input type="text" id="mobileSearchInput" placeholder="Wyszukaj...">
             <img id="mobileSearchIcon" src="styles/searchIcon.svg">
         </div>
-    <div id="moviesSection" class="contentSection activeSection">
-        <div class="sectionTitle">Filmy</div>
-        <div class="carouselWrapper">
-            <button class="carouselBtn leftBtn">&lt;</button>
-            <div id="itemsWrapper" class="carouselItems">
-                
-                <?php if (!empty($filmy)): ?>
-                    <?php foreach ($filmy as $film): ?>
-                        <div class="itemCard">
-                            <div class="itemCardPoster" 
-                                 style="background-image: url('plakaty_filmow/<?php echo htmlspecialchars($film['plakat']); ?>'); 
-                                        background-size: cover; 
-                                        background-position: center;">
-                            </div>
-                            <div class="itemCardFooter">
-                                <div class="itemCardTitle">
-                                    <?php echo htmlspecialchars($film['tytul']); ?>
-                                </div>
-                                <button class="likeBtn">♡</button>
-                            </div>
+        <div id="moviesSection" class="contentSection activeSection">
+            <div class="sectionTitle">Filmy</div>
+            <div class="carouselWrapper">
+                <button class="carouselBtn leftBtn">&lt;</button>
+                <div id="itemsWrapper" class="carouselItems">
+                    <div class="itemCard">
+                        <div class="itemCardPoster"></div>
+                        <div class="itemCardFooter">
+                            <div class="itemCardTitle">Film 1</div>
+                            <button class="likeBtn">♡</button>
                         </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Brak filmów w bazie danych.</p>
-                <?php endif; ?>
-                
+                    </div>
+                    <div class="itemCard">
+                        <div class="itemCardPoster"></div>
+                        <div class="itemCardFooter">
+                            <div class="itemCardTitle">Film 2</div>
+                            <button class="likeBtn">♡</button>
+                        </div>
+                    </div>
+                    <div class="itemCard">
+                        <div class="itemCardPoster"></div>
+                        <div class="itemCardFooter">
+                            <div class="itemCardTitle">Film 3</div>
+                            <button class="likeBtn">♡</button>
+                        </div>
+                    </div>
+                    <div class="itemCard">
+                        <div class="itemCardPoster"></div>
+                        <div class="itemCardFooter">
+                            <div class="itemCardTitle">Film 4</div>
+                            <button class="likeBtn">♡</button>
+                        </div>
+                    </div>                                                
+                </div>
+                <button class="carouselBtn rightBtn">&gt;</button>
             </div>
-            <button class="carouselBtn rightBtn">&gt;</button>
         </div>
-    </div>
         <div id="showsSection" class="contentSection">
             <div class="sectionTitle">Seriale</div>
             <div class="carouselWrapper">
