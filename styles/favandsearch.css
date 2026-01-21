@@ -1,0 +1,357 @@
+/* SEKCJA ULUBIONYCH */
+#favouritesWrapper {
+    background-color: #000;
+    color: white;
+    padding: 120px 40px 60px 40px;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+}
+
+#favouritesTitle {
+    font-size: 56px;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+
+.favouriteItem {
+    display: grid;
+    grid-template-columns: 240px 1fr 250px;
+    gap: 40px;
+    margin-bottom: 100px;
+    position: start;
+}
+
+.favouriteItem .title, 
+.favouriteItem .year, 
+.favouriteItem .duration {
+    display: inline-flex;
+    align-items: baseline;
+}
+
+.poster {
+    width: 240px;
+    height: 360px;
+    background-color: #3d3d3d;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.movieContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.movieHeader {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 800;
+    color: white;
+}
+
+.year {
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    margin-left: 20px;
+}
+
+.duration {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin-left: auto; 
+    padding-left: 60px; 
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    max-width: 650px;
+    color: #eee;
+}
+
+.genres, .director {
+    font-size: 18px;
+    margin-bottom: 8px;
+    text-transform: lowercase;
+}
+
+.ratingSection {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.rating {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.likeBtn {
+    background-color: #eaca3f;
+    color: black;
+    border: none;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#whereToWatch {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#whereToWatchTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#vodLinks {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    grid-auto-flow: column;
+    gap: 15px 40px;
+    justify-content: start;
+}
+
+.vodLink {
+    display: flex;
+    align-items: center;   
+    gap: 12px;
+}
+
+.vodIcon {
+    width: 32px;
+    height: 24px;
+    border: 2px solid #eaca3f;
+    border-radius: 4px;
+    flex-shrink: 0;        
+}
+
+.vodLinkText {
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    color: white;
+}
+
+
+@media (max-width: 768px) {
+
+   header {
+        position: relative; 
+        top: 0;
+        height: auto;
+        display: flex;
+        flex-direction: column; 
+        z-index: 100;
+    }
+    #centerSection {
+        display: flex;
+        background-color: #000 !important;
+        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        position: relative; 
+    }
+
+    #searchBar {
+        width: 100%;
+        position: relative;
+    }
+    
+    #searchInput {
+        width: 100%;
+        height: 50px;
+        background-color: #fff;
+        border: 3px solid #a7933d; 
+        border-radius: 12px;
+        padding: 0 45px 0 15px;
+        font-size: 18px;
+        color: #000;
+        box-sizing: border-box;
+    }
+    #searchIcon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 20px;
+        filter: brightness(0);
+    }
+
+    #favouritesWrapper {
+        padding: 20px;
+    }
+
+    #favouritesTitle {
+        font-size: 36px;
+        text-align: left; 
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .favouriteItem {
+        display: flex; 
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 15px;
+        margin-bottom: 60px;
+    }
+
+    .poster {
+        width: 100%; 
+        max-width: 200px; 
+        height: auto;
+        aspect-ratio: 2 / 3;
+        margin-bottom: 10px;
+    }
+
+    .movieContent {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .movieHeader {
+        display: flex;
+        flex-direction: row; 
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 10px;
+    }
+
+    .title {
+        font-size: 36px; 
+        margin: 0;
+    }
+
+    .year {
+        font-size: 20px;
+        color: #ccc;
+        font-weight: bold;
+    }
+
+    .duration {
+        width: 100%; 
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .description {
+        font-size: 20px;
+        line-height: 1.4;
+        margin: 10px 0;
+    }
+
+    .genres, .director {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    .ratingSection {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .rating {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .likeBtn {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    #whereToWatch {
+        width: 100%;
+        margin-top: 30px;
+        padding-top: 5px;
+    }
+
+    #whereToWatchTitle {
+        font-size: 40px; 
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    
+}
+
+/* Sekcja Wyszukiwania */
+#searchWrapper {
+    background-color: #000;
+    color: white;
+    padding: 120px 40px 60px 40px; 
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+}
+
+#searchTitle {
+    font-size: 56px;
+    font-weight: bold;
+    margin-bottom: 10px; 
+}
+
+#searchCount {
+    font-size: 40px;
+    color: #eaca3f; 
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+
+.searchResultsItem {
+    display: grid;
+    grid-template-columns: 240px 1fr 250px;
+    gap: 40px;
+    margin-bottom: 100px;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    #searchWrapper {
+        padding: 20px;
+    }
+
+    #searchTitle {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    #searchCount {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .searchResultsItem {
+        display: flex; 
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 60px;
+    }
+}

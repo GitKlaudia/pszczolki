@@ -10,15 +10,16 @@ $seriale = getAllShows();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/index.css" rel="stylesheet">
+    <link href="styles/common.css" rel="stylesheet">
     <title>B-Movie</title>
 </head>
 <body>
     <header>
-        <div id="headerLogoAndTitle">
+            <a href="index.php" id="headerLogoAndTitle" style="text-decoration: none;">
             <img id="headerLogo" src="styles/logo.svg">
             <div id="headerTitle">B-Movie</div>
-        </div>
+            </a>
         <div id="centerSection">
     <div class="inputWithSuggestions">
         <input type="text" id="searchInput" placeholder="Wyszukaj...">
@@ -35,14 +36,17 @@ $seriale = getAllShows();
 
 
             <div id="navBar">
-                <div class="navItem" id="navMovies">Filmy</div>
-                <div class="navItem" id="navShows">Seriale</div>
+                <a href="search.html" class="navItem" id="navMovies">Filmy</a>
+                <a href="search.html" class="navItem" id="navShows">Seriale</a>
+                <a href="favourites.html" class="navItem" id="navFav">Polubione</a>
+                </div>
+                <button id="themeToggle" title="Zmień motyw">
+                <img id="themeIcon" src="styles/light.svg" alt="Motyw">
+                </button>
+                </div>
             </div>
         </div>
-        <div id="adminBtn">
-            <div id="adminBtnText">Admin</div>
-            <img id="adminBtnIcon" src="styles/adminIcon.svg">
-        </div>
+
     </header>
     <div id="mainBanner">
         <div id="mainBannerRowsWrapper">
@@ -113,12 +117,10 @@ $seriale = getAllShows();
                 </div>
                 <button class="carouselBtn rightBtn" onclick="scrollMore('SerialWrapper')">&gt;</button>
             </div>
-        </div>
-        <div id="likedLink">Polubione <span id="likedLinkArrow">&gt;</span>
-        </div>
     </div>
     <script src="scroll.js"></script>
     <script src="suggestions.js"></script>
+    <script src="themeToggle.js"></script>
 
 </body>
 </html>

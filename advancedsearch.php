@@ -12,26 +12,28 @@ $allPlatforms =  getAllPlatforms();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/common.css" rel="stylesheet">
+    <link href="styles/advsearch.css" rel="stylesheet">
     <title>B-Movie - Wyszukiwanie zaawansowane</title>
 </head>
 <body class="advancedSearchBody">
     <header>
-        <div id="headerLogoAndTitle">
-            <img id="headerLogo" src="styles/logo.svg">
-            <div id="headerTitle">B-Movie</div>
-        </div>
+        <a href="index.php" id="headerLogoAndTitle" style="text-decoration: none;">
+        <img id="headerLogo" src="styles/logo.svg">
+        <div id="headerTitle">B-Movie</div>
+    </a>
+    
         <div id="centerSection">
             <div id="searchBar">
                 <input type="text" id="searchInput" placeholder="Wyszukaj...">
                 <img id="searchIcon" src="styles/searchIcon.svg">
             </div>
         </div>
-        <div id="adminBtn">
-            <div id="adminBtnText">Admin</div>
-            <img id="adminBtnIcon" src="styles/adminIcon.svg">
+        <div id="navBar">
+        <button id="themeToggle" title="Zmień motyw">☀️</button>
         </div>
     </header>
+
 
     <main id="advancedSearchWrapper">
         <h1 id="advancedSearchTitle">Wyszukiwanie zaawansowane</h1>
@@ -150,4 +152,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+<script src="themeToggle.js"></script>
 </html>
