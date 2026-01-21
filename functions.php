@@ -1,9 +1,6 @@
 <?php
 require_once 'database.php';
 
-// ============================================
-// FILMY
-// ============================================
 
 function getAllMovies() {
     $conn = getConnection();
@@ -23,7 +20,7 @@ function getAllMovies() {
 
 function getMovieById($id) {
     $conn = getConnection();
-    $id = (int)$id; // zabezpieczenie
+    $id = (int)$id; 
     $sql = "SELECT * FROM filmy WHERE id = $id";
     $result = $conn->query($sql);
     
@@ -75,6 +72,24 @@ function getMovieDirectors($filmId) {
     $conn->close();
     return $rezyserzy;
 }
+function getAllDirectors() {
+        $conn = getConnection();
+        $sql = "SELECT id, imie, nazwisko FROM rezyserzy ORDER BY nazwisko, imie";
+        $result = $conn->query($sql);
+
+        $directors = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $directors[] = $row;
+            }
+            $result->free_result();
+        }
+        $conn->close();
+        return $directors;
+    }
+
+    $allDirectors = getAllDirectors();
+
 
 function getMovieRating($filmId) {
     $conn = getConnection();
@@ -113,6 +128,23 @@ function getMoviePlatforms($filmId) {
     $conn->close();
     return $platformy;
 }
+function getAllPlatforms() {
+    $conn = getConnection();
+    $sql = "SELECT DISTINCT p.nazwa FROM platformy p
+            JOIN dostepnosc_na_platformach dp ON dp.id_platformy = p.id";
+    $result = $conn->query($sql);
+
+    $platforms = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $platforms[] = $row['nazwa'];
+        }
+        $result->free_result();
+    }
+    $conn->close();
+    return $platforms;
+}
+
 
 function getMovieActors($filmId) {
     $conn = getConnection();
@@ -134,6 +166,24 @@ function getMovieActors($filmId) {
     return $aktorzy;
 }
 
+function getAllActors() {
+    $conn = getConnection();
+    $sql = "SELECT id, imie, nazwisko FROM aktorzy ORDER BY nazwisko, imie";
+    $result = $conn->query($sql);
+
+    $actors = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $actors[] = $row;
+        }
+        $result->free_result();
+    }
+    $conn->close();
+    return $actors;
+}
+$allActors = getAllActors();
+
+
 function getMovieComments($filmId) {
     $conn = getConnection();
     $filmId = (int)$filmId;
@@ -153,9 +203,6 @@ function getMovieComments($filmId) {
     return $komentarze;
 }
 
-// ============================================
-// SERIALE (te same funkcje)
-// ============================================
 
 function getAllShows() {
     $conn = getConnection();
@@ -188,8 +235,5 @@ function getShowById($id) {
     return $serial;
 }
 
-// Analogicznie dla seriali:
-// getShowCategories(), getShowDirectors(), getShowRating(), 
-// getShowPlatforms(), getShowActors(), getShowComments()
-// (zamieniasz 'film' na 'serial' w WHERE)
+
 ?>

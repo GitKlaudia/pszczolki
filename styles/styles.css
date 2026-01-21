@@ -290,6 +290,9 @@ header {
     padding: 0;
 }
 
+
+
+
 .carouselItems::-webkit-scrollbar {
     height: 8px;
 }
@@ -308,7 +311,7 @@ header {
     justify-content: center;
 }
 
-#itemsWrapper {
+#SerialWrapper, #MovieWrapper {
     width: auto;
     display: flex;
     justify-content: center;
@@ -318,7 +321,7 @@ header {
 }
 
 @media (max-width: 1300px) {
-    #itemsWrapper {
+    #SerialWrapper, #MovieWrapper {
         justify-content: flex-start !important;
     }
 }
@@ -341,6 +344,8 @@ header {
     background-color: #3d3d3d;
     aspect-ratio: 2 / 3;
     border-radius: 8px;
+    background-size: cover;
+    background-position: center;
 }
 
 .itemCardFooter {
@@ -1075,7 +1080,6 @@ header {
 }
 
 .suggestionsBox {
-    display: none; 
     position: absolute;
     top: 45px;
     left: 0;
@@ -1087,6 +1091,11 @@ header {
     z-index: 100;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
+
+.suggestionsBox.active {
+    display: block;
+}
+
 
 .advancedSearchInput:focus + .suggestionsBox,
 .suggestionsBox:active {
@@ -1340,3 +1349,4 @@ header {
     background-position: center;
     color: transparent;
 }
+
