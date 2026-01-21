@@ -49,6 +49,26 @@ header {
     justify-content: center;
 }
 
+.advSearch{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid #a7933d;
+    border-radius: 8px;
+    background-color: transparent;
+    color: black;
+    text-decoration: none;
+     transition: all 0.3s ease;
+}
+.advSearch:hover {
+    background-color: #ffd50053;
+    cursor: pointer;
+     transform: scale(1.1);
+}
+
+   
+
+
 @media (max-width: 768px) {
     #centerSection {
         order: 3;
@@ -137,15 +157,7 @@ header {
     width: auto;
 }
 
-#navBar {
-    display: flex;
-    gap: 15px;
-    margin-right: 0;
-    color: white;
-    font-size: 40px;
-    -webkit-text-stroke: 1px #cf8600;
-    font-weight: bold;
-}
+
 
 @media (max-width: 768px) {
     #navBar {
@@ -153,9 +165,7 @@ header {
     }
 }
 
-.navItem {
-    margin: 0 10px;
-}
+
 
 #adminBtn {
     display: flex;

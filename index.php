@@ -24,7 +24,6 @@ $seriale = getAllShows();
     <div class="inputWithSuggestions">
         <input type="text" id="searchInput" placeholder="Wyszukaj...">
         <img id="searchIcon" src="styles/searchIcon.svg">
-
         <div class="suggestionsBox">
             <?php foreach ($filmy as $film): ?>
                 <div class="suggestion">
@@ -33,19 +32,22 @@ $seriale = getAllShows();
             <?php endforeach; ?>
         </div>
     </div>
+    <a href="advancedSearch.php" class="advSearch">Wyszukiwanie zaawansowane ></a>
 
+</div>
 
             <div id="navBar">
                 <a href="search.php" class="navItem" id="navMovies">Filmy</a>
                 <a href="search.php" class="navItem" id="navShows">Seriale</a>
                 <a href="favourites.php" class="navItem" id="navFav">Polubione</a>
-                </div>
                 <button id="themeToggle" title="Zmień motyw">
                 <img id="themeIcon" src="styles/light.svg" alt="Motyw">
                 </button>
                 </div>
+                
+                </div>
             </div>
-        </div>
+        
 
     </header>
     <div id="mainBanner">

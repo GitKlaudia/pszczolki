@@ -30,10 +30,13 @@ $allPlatforms =  getAllPlatforms();
             </div>
         </div>
         <div id="navBar">
-        <button id="themeToggle" title="Zmień motyw">
-        <img id="themeIcon" src="styles/light.svg" alt="Motyw">
-        </button>
-        </div>
+                <a href="search.php" class="navItem" id="navMovies">Filmy</a>
+                <a href="search.php" class="navItem" id="navShows">Seriale</a>
+                <a href="favourites.php" class="navItem" id="navFav">Polubione</a>
+                <button id="themeToggle" title="Zmień motyw">
+                <img id="themeIcon" src="styles/light.svg" alt="Motyw">
+                </button>
+                </div>
     </header>
 
 

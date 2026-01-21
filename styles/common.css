@@ -59,6 +59,18 @@ header {
     font-weight: bold;
     color: black;
 }
+#navBar {
+    display: flex;
+    gap: 15px;
+    margin-right: 0;
+    color: white;
+    font-size: 40px;
+    -webkit-text-stroke: 1px #cf8600;
+    font-weight: bold;
+}
+.navItem {
+    margin: 0 10px;
+}
 
 #adminBtn {
     display: flex;
