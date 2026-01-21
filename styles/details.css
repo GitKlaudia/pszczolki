@@ -225,7 +225,6 @@
 #castTitle {
     font-size: 32px;
     font-weight: bold;
-    color: white;
     margin-bottom: 10px;
     width: 100%; 
     text-align: left;
@@ -246,7 +245,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
 }
 
 .castPersonImage {
@@ -465,4 +463,10 @@
         gap: 20px;
         padding: 10px 0;
     }
+}
+body.light-mode  #year,
+body.light-mode #duration,
+body.light-mode #genres,
+body.light-mode #director {
+    color: #392700;
 }

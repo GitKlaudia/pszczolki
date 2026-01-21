@@ -30,7 +30,9 @@ $allPlatforms =  getAllPlatforms();
             </div>
         </div>
         <div id="navBar">
-        <button id="themeToggle" title="Zmień motyw">☀️</button>
+        <button id="themeToggle" title="Zmień motyw">
+        <img id="themeIcon" src="styles/light.svg" alt="Motyw">
+        </button>
         </div>
     </header>
 

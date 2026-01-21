@@ -6,6 +6,20 @@ html, body {
     box-sizing: border-box;
     background-color: #000; 
     overflow-x: hidden; 
+    background-image: url('honeybg.png');
+    background-size: 1000px, cover;
+}
+.navItem,#headerTitle {
+    color: #000 !important;
+}
+
+.navItem {
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.navItem:hover {
+    transform: scale(1.1);
 }
 
 header {
@@ -28,12 +42,16 @@ header {
     align-items: center;
     height: 100%;
     margin-left: 20px;
+    transition: transform 0.2s ease;
 }
 
 #headerLogo {
     height: 60px;
     width: auto;
     margin-right: 10px;
+}
+#headerLogoAndTitle:hover{
+    transform: scale(1.1);
 }
 
 #headerTitle {
@@ -109,20 +127,34 @@ header {
     transition: all 0.3s ease;
 }
 
+
+#themeToggle:hover {
+    transform: scale(1.1);
+}
+
 body.light-mode {
-    background-color: #f4f4f4 !important;
     color: #1a1a1a !important;
+    background-image: url('lighthoneybg.png')!important;
+    background-size: 1000px, cover;
+    background-color: #fff !important;
 }
 
 body.light-mode header {
     background-color: #ffd700; 
 }
 
-body.light-mode #detailsWrapper, 
-body.light-mode #favouritesWrapper, 
-body.light-mode #searchWrapper {
-    background-color: #ffffff;
+
+body.light-mode #searchWrapper,
+body.light-mode #advancedSearchWrapper,
+body.light-mode #favouritesWrapper {
     color: #1a1a1a;
+    background-image: url('lighthoneybg.png')!important;
+    background-size: 1000px, cover;
+    background-color: #fff !important;
+}
+body.light-mode #detailsWrapper {
+    background-color: #00000000 !important;
+    color: #1a1a1a !important;
 }
 
 body.light-mode .navItem, 

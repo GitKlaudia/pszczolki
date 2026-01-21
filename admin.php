@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['admin_logged']) || $_SESSION['admin_logged'] !== true) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,10 +28,10 @@
                 <img id="searchIcon" src="styles/searchIcon.svg">
             </div>
         </div>
-        <div id="adminBtn">
+        <<a href="logoutscript.php" id="adminBtn" style="text-decoration: none;">
             <div id="adminBtnText">Wyloguj</div>
             <img id="adminBtnIcon" src="styles/adminIcon.svg">
-        </div>
+        </a>
     </header>
 
     <div id="moviesManagmentWrapper">

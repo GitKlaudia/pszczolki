@@ -19,6 +19,11 @@
                 <img id="searchIcon" src="styles/searchIcon.svg">
             </div>
         </div>
+        <div id="navBar">
+        <button id="themeToggle" title="Zmień motyw">
+        <img id="themeIcon" src="styles/light.svg" alt="Motyw">
+        </button>
+        </div>
     </header>
 <div id="searchWrapper">
         <div id="searchTitle">Wyniki wyszukiwania: Tytuł</div>
@@ -172,4 +177,5 @@
     </div>
  
 </body>
+<script src="themeToggle.js"></script>
 </html>

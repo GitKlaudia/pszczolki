@@ -36,9 +36,9 @@ $seriale = getAllShows();
 
 
             <div id="navBar">
-                <a href="search.html" class="navItem" id="navMovies">Filmy</a>
-                <a href="search.html" class="navItem" id="navShows">Seriale</a>
-                <a href="favourites.html" class="navItem" id="navFav">Polubione</a>
+                <a href="search.php" class="navItem" id="navMovies">Filmy</a>
+                <a href="search.php" class="navItem" id="navShows">Seriale</a>
+                <a href="favourites.php" class="navItem" id="navFav">Polubione</a>
                 </div>
                 <button id="themeToggle" title="Zmień motyw">
                 <img id="themeIcon" src="styles/light.svg" alt="Motyw">
