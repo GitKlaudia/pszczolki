@@ -3,6 +3,8 @@
     padding: 0;
     height: 100vh;
     background-color: #000000;
+    background-image: url('adminlogin.png');
+
     background-size: cover;
     background-position: center;
     display: flex;
