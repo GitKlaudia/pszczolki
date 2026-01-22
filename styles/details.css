@@ -1,3 +1,5 @@
+
+
 #detailsWrapper {
     max-width: 1200px;
     margin: 80px auto 0;
@@ -232,13 +234,45 @@
 
 .castGallery {
     display: flex;
-    flex-direction: row;
     gap: 40px;
     overflow-x: auto;
-    width: 100%;
-    justify-content: flex-start;
+    flex-grow: 1; 
+    padding: 10px 0;
+    scroll-behavior: smooth;
+    overflow-x: auto; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }
 
+.castGallery::-webkit-scrollbar {
+    display: none; 
+}
+.castGalleryWrapper {
+    display: flex;
+    align-items: center; 
+    width: 100%;
+    gap: 10px; 
+}
+.carouselBtn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid white; 
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+.carouselBtn:hover {
+    background-color: #ffd50053;
+    transform: scale(1.1);
+}
 .castPersonWrapper {
     text-align: center;
     flex-shrink: 0;
@@ -246,7 +280,13 @@
     flex-direction: column;
     align-items: center;
 }
+.leftBtn {
+    left: 10px;
+}
 
+.rightBtn {
+    right: 10px;
+}
 .castPersonImage {
     width: 80px;
     height: 80px;
@@ -470,3 +510,5 @@ body.light-mode #genres,
 body.light-mode #director {
     color: #392700;
 }
+
+

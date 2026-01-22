@@ -236,4 +236,285 @@ function getShowById($id) {
 }
 
 
+function getShowCategories($showId) {
+    $conn = getConnection();
+    $showId = (int)$showId;
+    $sql = "SELECT k.nazwa 
+            FROM kategorie_tresci kt
+            JOIN kategorie k ON kt.id_kategorii = k.id
+            WHERE kt.typ_tresci = 'serial' AND kt.id_tresci = $showId";
+    $result = $conn->query($sql);
+
+    $categories = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $categories[] = $row['nazwa'];
+        }
+        $result->free_result();
+    }
+    $conn->close();
+    return $categories;
+}
+
+function getShowDirectors($showId) {
+    $conn = getConnection();
+    $showId = (int)$showId;
+    $sql = "SELECT r.imie, r.nazwisko, r.data_urodzenia 
+            FROM produkcje_rezyserow pr
+            JOIN rezyserzy r ON pr.id_rezysera = r.id
+            WHERE pr.typ_tresci = 'serial' AND pr.id_tresci = $showId";
+    $result = $conn->query($sql);
+
+    $directors = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $directors[] = $row;
+        }
+        $result->free_result();
+    }
+    $conn->close();
+    return $directors;
+}
+
+function getShowRating($showId) {
+    $conn = getConnection();
+    $showId = (int)$showId;
+    $sql = "SELECT AVG(ocena) AS ocena 
+            FROM oceny 
+            WHERE typ_tresci = 'serial' AND id_tresci = $showId";
+    $result = $conn->query($sql);
+
+    $rating = null;
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $rating = $row['ocena'] ? round($row['ocena'], 2) : null;
+        $result->free_result();
+    }
+    $conn->close();
+    return $rating;
+}
+
+function getShowPlatforms($showId) {
+    $conn = getConnection();
+    $showId = (int)$showId;
+    $sql = "SELECT p.nazwa, p.ikona, dp.link 
+            FROM dostepnosc_na_platformach dp
+            JOIN platformy p ON dp.id_platformy = p.id
+            WHERE dp.typ_tresci = 'serial' AND dp.id_tresci = $showId";
+    $result = $conn->query($sql);
+
+    $platforms = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $platforms[] = $row;
+        }
+        $result->free_result();
+    }
+    $conn->close();
+    return $platforms;
+}
+
+function getShowActors($showId) {
+    $conn = getConnection();
+    $showId = (int)$showId;
+    $sql = "SELECT a.imie, a.nazwisko, a.data_urodzenia, a.zdjecie, wa.rola
+            FROM wystepy_aktorow wa
+            JOIN aktorzy a ON wa.id_aktora = a.id
+            WHERE wa.typ_tresci = 'serial' AND wa.id_tresci = $showId";
+    $result = $conn->query($sql);
+
+    $actors = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $actors[] = $row;
+        }
+        $result->free_result();
+    }
+    $conn->close();
+    return $actors;
+}
+
+function getShowComments($showId) {
+    $conn = getConnection();
+    $showId = (int)$showId;
+    $sql = "SELECT nazwa_uzytkownika, komentarz, polubienia 
+            FROM komentarze
+            WHERE typ_tresci = 'serial' AND id_tresci = $showId";
+    $result = $conn->query($sql);
+
+    $comments = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $comments[] = $row;
+        }
+        $result->free_result();
+    }
+    $conn->close();
+    return $comments;
+}
+
+function normalize($str) {
+    $str = strtolower($str);
+    $polish = ['ą','ć','ę','ł','ń','ó','ś','ż','ź'];
+    $replace = ['a','c','e','l','n','o','s','z','z'];
+    return str_replace($polish, $replace, $str);
+}
+
+function searchMoviesByTitle($q) {
+    $q = normalize($q);  
+    $movies = getAllMovies(); 
+    return array_filter($movies, fn($m) => str_contains(normalize($m['tytul']), $q));
+}
+
+function searchShowsByTitle($q) {
+    $q = normalize($q); 
+    $shows = getAllShows(); 
+    return array_filter($shows, fn($s) => str_contains(normalize($s['tytul']), $q));
+}
+
+
+function searchAdvancedMovies(array $categories, string $director, array $actors, array $platforms): array {
+    $conn = getConnection();
+
+    $whereClauses = ["1=1"];
+
+    if (!empty($categories)) {
+        $escaped = array_map(fn($c) => "'" . $conn->real_escape_string($c) . "'", $categories);
+        $whereClauses[] = "id IN (
+            SELECT id_tresci 
+            FROM kategorie_tresci kt 
+            JOIN kategorie k ON kt.id_kategorii = k.id 
+            WHERE k.nazwa IN (" . implode(",", $escaped) . ")
+            AND kt.typ_tresci = 'film'
+        )";
+    }
+
+    if (!empty($director)) {
+        $dir = $conn->real_escape_string($director);
+        $whereClauses[] = "id IN (
+            SELECT id_tresci 
+            FROM produkcje_rezyserow pr 
+            JOIN rezyserzy r ON pr.id_rezysera = r.id 
+            WHERE CONCAT(r.imie,' ',r.nazwisko) = '$dir'
+            AND pr.typ_tresci = 'film'
+        )";
+    }
+
+    if (!empty($actors)) {
+        $escaped = array_map(fn($a) => "'" . $conn->real_escape_string($a) . "'", $actors);
+        $whereClauses[] = "id IN (
+            SELECT id_tresci 
+            FROM wystepy_aktorow wa 
+            JOIN aktorzy a ON wa.id_aktora = a.id 
+            WHERE CONCAT(a.imie,' ',a.nazwisko) IN (" . implode(",", $escaped) . ")
+            AND wa.typ_tresci = 'film'
+        )";
+    }
+
+    if (!empty($platforms)) {
+        $escaped = array_map(fn($p) => "'" . $conn->real_escape_string($p) . "'", $platforms);
+        $whereClauses[] = "id IN (
+            SELECT id_tresci 
+            FROM dostepnosc_na_platformach dp 
+            JOIN platformy p ON dp.id_platformy = p.id 
+            WHERE p.nazwa IN (" . implode(",", $escaped) . ")
+            AND dp.typ_tresci = 'film'
+        )";
+    }
+
+    $sql = "SELECT * FROM filmy WHERE " . implode(" AND ", $whereClauses);
+    $result = $conn->query($sql);
+
+    $movies = [];
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $movies[] = $row;
+        }
+        $result->free_result();
+    }
+
+    $conn->close();
+    return $movies;
+}
+
+function searchAdvancedShows(array $categories, string $director, array $actors, array $platforms): array {
+    $conn = getConnection();
+
+    $whereClauses = ["1=1"];
+
+    if (!empty($categories)) {
+        $escaped = array_map(fn($c) => "'" . $conn->real_escape_string($c) . "'", $categories);
+        $whereClauses[] = "id IN (
+            SELECT id_tresci 
+            FROM kategorie_tresci kt 
+            JOIN kategorie k ON kt.id_kategorii = k.id 
+            WHERE k.nazwa IN (" . implode(",", $escaped) . ")
+            AND kt.typ_tresci = 'serial'
+        )";
+    }
+
+    if (!empty($director)) {
+        $dir = $conn->real_escape_string($director);
+        $whereClauses[] = "id IN (
+            SELECT id_tresci 
+            FROM produkcje_rezyserow pr 
+            JOIN rezyserzy r ON pr.id_rezysera = r.id 
+            WHERE CONCAT(r.imie,' ',r.nazwisko) = '$dir'
+            AND pr.typ_tresci = 'serial'
+        )";
+    }
+
+    if (!empty($actors)) {
+        $escaped = array_map(fn($a) => "'" . $conn->real_escape_string($a) . "'", $actors);
+        $whereClauses[] = "id IN (
+            SELECT id_tresci 
+            FROM wystepy_aktorow wa 
+            JOIN aktorzy a ON wa.id_aktora = a.id 
+            WHERE CONCAT(a.imie,' ',a.nazwisko) IN (" . implode(",", $escaped) . ")
+            AND wa.typ_tresci = 'serial'
+        )";
+    }
+
+    if (!empty($platforms)) {
+        $escaped = array_map(fn($p) => "'" . $conn->real_escape_string($p) . "'", $platforms);
+        $whereClauses[] = "id IN (
+            SELECT id_tresci 
+            FROM dostepnosc_na_platformach dp 
+            JOIN platformy p ON dp.id_platformy = p.id 
+            WHERE p.nazwa IN (" . implode(",", $escaped) . ")
+            AND dp.typ_tresci = 'serial'
+        )";
+    }
+
+    $sql = "SELECT * FROM seriale WHERE " . implode(" AND ", $whereClauses);
+    $result = $conn->query($sql);
+
+    $shows = [];
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $shows[] = $row;
+        }
+        $result->free_result();
+    }
+
+    $conn->close();
+    return $shows;
+}
+
+function getAllCategories(): array {
+    $conn = getConnection();
+    $result = $conn->query("SELECT DISTINCT nazwa FROM kategorie ORDER BY nazwa ASC");
+    $categories = [];
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $categories[] = $row['nazwa'];
+        }
+        $result->free_result();
+    }
+    $conn->close();
+    return $categories;
+}
+
+
 ?>
+

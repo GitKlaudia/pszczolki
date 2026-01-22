@@ -1,184 +1,122 @@
+<?php
+require_once 'functions.php';
+
+$query = trim($_GET['q'] ?? '');
+
+$type = $_GET['type'] ?? '';
+$categories = isset($_GET['categories']) ? explode(',', $_GET['categories']) : [];
+$director   = $_GET['director'] ?? '';
+$actors     = isset($_GET['actors']) ? explode(',', $_GET['actors']) : [];
+$platforms  = isset($_GET['platforms']) ? explode(',', $_GET['platforms']) : [];
+
+$filmy = [];
+$seriale = [];
+
+
+if ($query !== '') {
+    $filmy   = searchMoviesByTitle($query);
+    $seriale = searchShowsByTitle($query);
+
+} elseif ($type !== '') {
+    $hasFilters = !empty($categories) || !empty($director) || !empty($actors) || !empty($platforms);
+    
+    if ($type === 'film') {
+        if ($hasFilters) {
+            $filmy = searchAdvancedMovies($categories, $director, $actors, $platforms);
+        } else {
+            $filmy = getAllMovies();
+        }
+    } elseif ($type === 'serial') {
+        if ($hasFilters) {
+            $seriale = searchAdvancedShows($categories, $director, $actors, $platforms);
+        } else {
+            $seriale = getAllShows();
+        }
+    } elseif ($type === 'all') {
+        if ($hasFilters) {
+            $filmy = searchAdvancedMovies($categories, $director, $actors, $platforms);
+            $seriale = searchAdvancedShows($categories, $director, $actors, $platforms);
+        } else {
+            $filmy = getAllMovies();
+            $seriale = getAllShows();
+        }
+    }
+}
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="styles/common.css" rel="stylesheet">
-    <link href="styles/favandsearch.css" rel="stylesheet">
-    <title>B-Movie</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="styles/common.css" rel="stylesheet">
+<link href="styles/favandsearch.css" rel="stylesheet">
+<title>B-Movie - Wyniki wyszukiwania</title>
 </head>
 <body>
-    <header>
-        <a href="index.php" id="headerLogoAndTitle" style="text-decoration: none;">
-            <img id="headerLogo" src="styles/logo.svg">
+<header>
+    <a href="index.php" id="headerLogoAndTitle">
+        <img id="headerLogo" src="styles/logo.svg">
         <div id="headerTitle">B-Movie</div>
-        </a>
-        <div id="centerSection">
-            <div id="searchBar">
-                <input type="text" id="searchInput" placeholder="Wyszukaj...">
-                <img id="searchIcon" src="styles/searchIcon.svg">
-            </div>
-        </div>
-        <div id="navBar">
-                <a href="search.php" class="navItem" id="navMovies">Filmy</a>
-                <a href="search.php" class="navItem" id="navShows">Seriale</a>
-                <a href="favourites.php" class="navItem" id="navFav">Polubione</a>
-                <button id="themeToggle" title="Zmień motyw">
-                <img id="themeIcon" src="styles/light.svg" alt="Motyw">
-                </button>
-                </div>
-    </header>
+    </a>
+</header>
+
 <div id="searchWrapper">
-        <div id="searchTitle">Wyniki wyszukiwania: Tytuł</div>
-        <div id="searchCount">Znalezione pozycje: 4</div>
-
-        <div class="searchResultsItem">
-            <img class="poster">
-            <div class="movieContent">
-                <div class="movieHeader">
-                    <div class="title">Tytuł</div>
-                    <div class="year">Rok</div>
-                    <div class="duration">Czas trwania</div>
-                </div>
-                <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat.
-                </div>
-                <div class="genres">gatunki</div>
-                <div class="director">reżyseria</div>
-        
-                <div class="ratingSection">
-                    <div class="rating">Ocena: 5/10</div>
-                    <button class="likeBtn">♡</button>
-                </div>
-            </div>
-            <div id="whereToWatch">
-                <div id="whereToWatchTitle">Gdzie obejrzeć?</div>
-                <div id="vodLinks">
-                    <div class="vodLink">
-                        <img class="vodIcon">
-                        <div class="vodLinkText">link</div>
-                    </div>
-                    <div class="vodLink">
-                        <img class="vodIcon">
-                        <div class="vodLinkText">link</div>
-                    </div>
-                </div>
-            </div>
-        </div>
- <div class="searchResultsItem">
-            <img class="poster">
-            <div class="movieContent">
-                <div class="movieHeader">
-                    <div class="title">Tytuł</div>
-                    <div class="year">Rok</div>
-                    <div class="duration">Czas trwania</div>
-                </div>
-                <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat.
-                </div>
-                <div class="genres">gatunki</div>
-                <div class="director">reżyseria</div>
-        
-                <div class="ratingSection">
-                    <div class="rating">Ocena: 8/10</div>
-                    <button class="likeBtn">♡</button>
-                </div>
-            </div>
-            <div id="whereToWatch">
-                <div id="whereToWatchTitle">Gdzie obejrzeć?</div>
-                <div id="vodLinks">
-                    <div class="vodLink">
-                        <img class="vodIcon">
-                        <div class="vodLinkText">link</div>
-                    </div>
-                    <div class="vodLink">
-                        <img class="vodIcon">
-                        <div class="vodLinkText">link</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <div class="searchResultsItem">
-            <img class="poster">
-            <div class="movieContent">
-                <div class="movieHeader">
-                    <div class="title">Tytuł</div>
-                    <div class="year">Rok</div>
-                    <div class="duration">Czas trwania</div>
-                </div>
-                <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat.
-                </div>
-                <div class="genres">gatunki</div>
-                <div class="director">reżyseria</div>
-        
-                <div class="ratingSection">
-                    <div class="rating">Ocena: 7/10</div>
-                    <button class="likeBtn">♡</button>
-                </div>
-            </div>
-            <div id="whereToWatch">
-                <div id="whereToWatchTitle">Gdzie obejrzeć?</div>
-                <div id="vodLinks">
-                    <div class="vodLink">
-                        <img class="vodIcon">
-                        <div class="vodLinkText">link</div>
-                    </div>
-                    <div class="vodLink">
-                        <img class="vodIcon">
-                        <div class="vodLinkText">link</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <div class="searchResultsItem">
-            <img class="poster">
-            <div class="movieContent">
-                <div class="movieHeader">
-                    <div class="title">Tytuł</div>
-                    <div class="year">Rok</div>
-                    <div class="duration">Czas trwania</div>
-                </div>
-                <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat.
-                </div>
-                <div class="genres">gatunki</div>
-                <div class="director">reżyseria</div>
-        
-                <div class="ratingSection">
-                    <div class="rating">Ocena: 7/10</div>
-                    <button class="likeBtn">♡</button>
-                </div>
-            </div>
-            <div id="whereToWatch">
-                <div id="whereToWatchTitle">Gdzie obejrzeć?</div>
-                <div id="vodLinks">
-                    <div class="vodLink">
-                        <img class="vodIcon">
-                        <div class="vodLinkText">link</div>
-                    </div>
-                    <div class="vodLink">
-                        <img class="vodIcon">
-                        <div class="vodLinkText">link</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div id="searchTitle">Wyniki wyszukiwania: <?php echo htmlspecialchars($query); ?></div>
+    <div id="searchCount">
+        Znalezione pozycje: <?php echo count($filmy) + count($seriale); ?>
     </div>
- 
-</body>
+
+    <?php if (!empty($filmy)): ?>
+        <h2>Filmy</h2>
+        <?php foreach ($filmy as $film): ?>
+            <div class="searchResultsItem">
+                <a href="details.php?type=film&id=<?php echo (int)$film['id']; ?>" class="itemCardTitleLink">
+                    <img class="poster" src="plakaty_filmow/<?php echo htmlspecialchars($film['plakat']); ?>">
+                </a>
+                <div class="movieContent">
+                    <div class="movieHeader">
+                        <div class="title">
+                    <a href="details.php?type=film&id=<?php echo (int)$film['id']; ?>" class="titleLink">
+                     <?php echo htmlspecialchars($film['tytul']); ?>
+                    </a>
+                    </div>
+
+                        <div class="year"><?php echo (int)$film['rok_produkcji']; ?></div>
+                        <div class="duration"><?php echo (int)$film['czas_trwania']; ?> min</div>
+                    </div>
+                    <div class="description"><?php echo nl2br(htmlspecialchars($film['opis'])); ?></div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if (!empty($seriale)): ?>
+        <h2>Seriale</h2>
+        <?php foreach ($seriale as $serial): ?>
+            <div class="searchResultsItem">
+                <a href="details.php?type=serial&id=<?php echo (int)$serial['id']; ?>">
+                    <img class="poster" src="plakaty_seriali/<?php echo htmlspecialchars($serial['plakat']); ?>">
+                </a>
+                <div class="movieContent">
+                    <div class="movieHeader">
+                        <div class="title">
+                        <a href="details.php?type=serial&id=<?php echo (int)$serial['id']; ?>" class="titleLink">
+                            <?php echo htmlspecialchars($serial['tytul']); ?>
+                        </a>
+                    </div>
+                        <div class="year"><?php echo (int)$serial['rok_produkcji']; ?></div>
+                    </div>
+                    <div class="description"><?php echo nl2br(htmlspecialchars($serial['opis'])); ?></div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if (empty($filmy) && empty($seriale)): ?>
+    <?php endif; ?>
+</div>
+
 <script src="themeToggle.js"></script>
+</body>
 </html>

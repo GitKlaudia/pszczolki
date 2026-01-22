@@ -5,6 +5,7 @@ $seriale = getAllShows();
 $allDirectors = getAllDirectors();
 $allActors = getAllActors();
 $allPlatforms =  getAllPlatforms();
+$allCategories = getAllCategories();
 
 ?>
 <!DOCTYPE html>
@@ -23,12 +24,7 @@ $allPlatforms =  getAllPlatforms();
         <div id="headerTitle">B-Movie</div>
     </a>
     
-        <div id="centerSection">
-            <div id="searchBar">
-                <input type="text" id="searchInput" placeholder="Wyszukaj...">
-                <img id="searchIcon" src="styles/searchIcon.svg">
-            </div>
-        </div>
+
         <div id="navBar">
                 <a href="search.php" class="navItem" id="navMovies">Filmy</a>
                 <a href="search.php" class="navItem" id="navShows">Seriale</a>
@@ -81,9 +77,7 @@ $allPlatforms =  getAllPlatforms();
                 <input type="text" id="actorInput" class="advancedSearchInput" placeholder="Wyszukaj...">
                 <div id="actorSuggestions" class="suggestionsBox">
                     <?php foreach ($allActors as $aktor): ?>
-                        <div class="suggestion">
-                            <?php echo htmlspecialchars($aktor['imie'] . ' ' . $aktor['nazwisko']); ?>
-                        </div>
+                        <div class="suggestion"><?php echo htmlspecialchars(trim($aktor['imie'] . ' ' . $aktor['nazwisko'])); ?></div>
                     <?php endforeach; ?>
                 </div>
             </div>

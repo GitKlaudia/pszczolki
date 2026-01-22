@@ -22,12 +22,32 @@ $seriale = getAllShows();
             </a>
         <div id="centerSection">
     <div class="inputWithSuggestions">
-        <input type="text" id="searchInput" placeholder="Wyszukaj...">
-        <img id="searchIcon" src="styles/searchIcon.svg">
+        <form id="searchForm" action="search.php" method="GET">
+            <input type="text" id="searchInput" name="q" placeholder="Wyszukaj...">
+            <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer; position: absolute; right: 15px; top: 50%; transform: translateY(-50%);">
+                <img src="styles/searchIcon.svg" alt="Szukaj" style="height: 20px; width: auto; display: block;">
+            </button>
+        </form>
+        <script>
+            const searchInput = document.getElementById('searchInput');
+            const searchForm = document.getElementById('searchForm');
+            searchForm.addEventListener('submit', function(e) {
+                const query = searchInput.value.trim();
+                if (!query) {
+                    e.preventDefault(); 
+                    return;
+                }
+            });
+        </script>
         <div class="suggestionsBox">
             <?php foreach ($filmy as $film): ?>
                 <div class="suggestion">
                     <?php echo htmlspecialchars($film['tytul']); ?>
+                </div>
+            <?php endforeach; ?>
+            <?php foreach ($seriale as $serial): ?>
+                <div class="suggestion">
+                    <?php echo htmlspecialchars($serial['tytul']); ?>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -37,8 +57,8 @@ $seriale = getAllShows();
 </div>
 
             <div id="navBar">
-                <a href="search.php" class="navItem" id="navMovies">Filmy</a>
-                <a href="search.php" class="navItem" id="navShows">Seriale</a>
+                <a href="search.php?type=film" class="navItem" id="navMovies">Filmy</a>
+                <a href="search.php?type=serial" class="navItem" id="navShows">Seriale</a>
                 <a href="favourites.php" class="navItem" id="navFav">Polubione</a>
                 <button id="themeToggle" title="Zmień motyw">
                 <img id="themeIcon" src="styles/light.svg" alt="Motyw">
@@ -59,8 +79,8 @@ $seriale = getAllShows();
     </div>
     <div id="contentSections">
         <div id="mobileNavBar">
-            <div class="mobileNavBarItem">Filmy</div>
-            <div class="mobileNavBarItem">Seriale</div>
+            <a href="search.php?type=film" class="mobileNavBarItem">Filmy</a>
+            <a href="search.php?type=serial" class="mobileNavBarItem">Seriale</a>
         </div>
         <div id="mobileSearchBar">
             <input type="text" id="mobileSearchInput" placeholder="Wyszukaj...">
@@ -75,9 +95,11 @@ $seriale = getAllShows();
                 <?php if (!empty($filmy)): ?>
                     <?php foreach ($filmy as $film): ?>
                         <div class="itemCard">
-                            <div class="itemCardPoster" 
-                                 style="background-image: url('plakaty_filmow/<?php echo htmlspecialchars($film['plakat']); ?>'); ">
-                            </div>
+                <a href="details.php?type=film&id=<?php echo (int)$film['id']; ?>" class="itemCardPosterLink">
+                    <div class="itemCardPoster" 
+                         style="background-image: url('plakaty_filmow/<?php echo htmlspecialchars($film['plakat']); ?>');">
+                    </div>
+                </a>
                             <div class="itemCardFooter">
                                 <div class="itemCardTitle">
                                     <?php echo htmlspecialchars($film['tytul']); ?>
@@ -94,31 +116,25 @@ $seriale = getAllShows();
             <button class="carouselBtn rightBtn" onclick="scrollMore('MovieWrapper')">&gt;</button>
         </div>
     </div>
-        <div id="showsSection" class="contentSection">
-            <div class="sectionTitle">Seriale</div>
-            <div class="carouselWrapper">
-                <button class="carouselBtn leftBtn" onclick="scrollLess('SerialWrapper')">&lt;</button>
-                <div id="SerialWrapper" class="carouselItems">
-                    <?php if (!empty($seriale)): ?>
-                        <?php foreach ($seriale as $serial): ?>
-                            <div class="itemCard">
-                                <div class="itemCardPoster" 
-                                     style="background-image: url('plakaty_seriali/<?php echo htmlspecialchars($serial['plakat']); ?>'); ">
-                                </div>
-                                <div class="itemCardFooter">
-                                    <div class="itemCardTitle">
-                                        <?php echo htmlspecialchars($serial['tytul']); ?>
-                                    </div>
-                                    <button class="likeBtn">♡</button>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <p>Brak seriali w bazie danych.</p>
-                    <?php endif; ?>                                         
+    <div id="showsSection" class="contentSection">
+        <div class="sectionTitle">Seriale</div>
+        <div class="carouselWrapper">
+            <button class="carouselBtn leftBtn" onclick="scrollLess('SerialWrapper')">&lt;</button>
+            <div id="SerialWrapper" class="carouselItems">
+                <?php foreach ($seriale as $serial): ?>
+                <div class="itemCard">
+                    <a href="details.php?type=serial&id=<?php echo (int)$serial['id']; ?>" class="itemCardPosterLink">
+                        <div class="itemCardPoster" style="background-image: url('plakaty_seriali/<?php echo htmlspecialchars($serial['plakat']); ?>');"></div>
+                    </a>
+                    <div class="itemCardFooter">
+                        <div class="itemCardTitle"><?php echo htmlspecialchars($serial['tytul']); ?></div>
+                        <button class="likeBtn">♡</button>
+                    </div>
                 </div>
-                <button class="carouselBtn rightBtn" onclick="scrollMore('SerialWrapper')">&gt;</button>
+                <?php endforeach; ?>
             </div>
+            <button class="carouselBtn rightBtn" onclick="scrollMore('SerialWrapper')">&gt;</button>
+        </div>
     </div>
     <script src="scroll.js"></script>
     <script src="suggestions.js"></script>

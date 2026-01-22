@@ -4,50 +4,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     searchBtn.addEventListener('click', () => {
 
-        const selectedCategories = Array.from(document.querySelectorAll('.searchSection'))
-            .filter(sec => sec.querySelector('.searchSectionHeader').innerText.toLowerCase() === 'kategoria')[0]
-            .querySelectorAll('.searchTag.active');
-        const categories = Array.from(selectedCategories).map(tag => tag.textContent);
+
+        const categorySection = Array.from(document.querySelectorAll('.searchSection'))
+            .find(sec => sec.querySelector('.searchSectionHeader').innerText.toLowerCase() === 'kategoria');
+        const selectedCategories = categorySection ? categorySection.querySelectorAll('.searchTag.active') : [];
+        const categories = Array.from(selectedCategories).map(tag => tag.textContent.trim());
 
         const directorInput = document.getElementById('directorInput');
-        const director = directorInput.value.trim();
+        const director = directorInput ? directorInput.value.trim() : '';
 
-        const selectedActors = Array.from(document.querySelectorAll('.castSearchRow .selectedTags .searchTag'));
-        const actors = Array.from(selectedActors).map(tag => tag.textContent);
+        const selectedActors = document.querySelectorAll('.castSearchRow .selectedTags .searchTag');
+        const actors = Array.from(selectedActors).map(tag => tag.textContent.trim());
 
-        const selectedPlatforms = Array.from(document.querySelectorAll('.searchSection'))
-            .filter(sec => sec.querySelector('.searchSectionHeader').innerText.toLowerCase() === 'platforma')[0]
-            .querySelectorAll('.searchTag.active');
-        const platforms = Array.from(selectedPlatforms).map(tag => tag.textContent);
+        const platformSection = Array.from(document.querySelectorAll('.searchSection'))
+            .find(sec => sec.querySelector('.searchSectionHeader').innerText.toLowerCase() === 'platforma');
+        const selectedPlatforms = platformSection ? platformSection.querySelectorAll('.searchTag.active') : [];
+        const platforms = Array.from(selectedPlatforms).map(tag => tag.textContent.trim());
 
-        const selectedTypeTag = Array.from(document.querySelectorAll('.searchSection'))
-            .filter(sec => sec.querySelector('.searchSectionHeader').innerText.toLowerCase() === 'typ')[0]
-            .querySelector('.searchTag.active');
-        const type = selectedTypeTag ? selectedTypeTag.textContent.toLowerCase() : 'film';
+        const typeSection = Array.from(document.querySelectorAll('.searchSection'))
+            .find(sec => sec.querySelector('.searchSectionHeader').innerText.toLowerCase() === 'typ');
+        const selectedTypeTag = typeSection ? typeSection.querySelector('.searchTag.active') : null;
+        const type = selectedTypeTag ? selectedTypeTag.textContent.trim().toLowerCase() : 'serial';
 
-        let table = type === 'film' ? 'filmy' : 'seriale';
-
-        let sql = "SELECT * FROM " + table + " WHERE 1=1";
-
+        const params = new URLSearchParams();
+        params.set('type', type);
+        
         if (categories.length > 0) {
-            sql += " AND id IN (SELECT id_tresci FROM kategorie_tresci kt JOIN kategorie k ON kt.id_kategorii = k.id WHERE k.nazwa IN ('" + categories.join("','") + "'))";
+            params.set('categories', categories.join(','));
         }
-
-        if (director !== "") {
-            sql += " AND id IN (SELECT id_tresci FROM produkcje_rezyserow pr JOIN rezyserzy r ON pr.id_rezysera = r.id WHERE CONCAT(r.imie,' ',r.nazwisko) = '" + director + "')";
+        if (director) {
+            params.set('director', director);
         }
-
         if (actors.length > 0) {
-            sql += " AND id IN (SELECT id_tresci FROM wystepy_aktorow wa JOIN aktorzy a ON wa.id_aktora = a.id WHERE CONCAT(a.imie,' ',a.nazwisko) IN ('" + actors.join("','") + "'))";
+            params.set('actors', actors.join(','));
         }
-
         if (platforms.length > 0) {
-            sql += " AND id IN (SELECT id_tresci FROM dostepnosc_na_platformach dp JOIN platformy p ON dp.id_platformy = p.id WHERE p.nazwa IN ('" + platforms.join("','") + "'))";
+            params.set('platforms', platforms.join(','));
         }
 
-        const newWindow = window.open();
-        newWindow.document.write("<!DOCTYPE html><html><head></head><body><pre style='white-space: pre-wrap;'>"  + sql + "</pre></body></html>");
-        newWindow.document.close();
+        window.location.href = 'search.php?' + params.toString();
     });
 
 });

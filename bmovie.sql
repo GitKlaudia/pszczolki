@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Sty 18, 2026 at 01:35 AM
--- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Jan 22, 2026 at 12:45 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -38,12 +38,12 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `login`, `haslo`) VALUES
-(1, 'admin', 'admin');
+(1, 'admin', '$2y$10$1GhELtuYn7/JVJFl44X2k.nZmVhhfz8BpqD6SZN0yquKbwis12Qe.');
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `aktorzy`
+-- Table structure for table `aktorzy`
 --
 
 CREATE TABLE `aktorzy` (
@@ -110,7 +110,7 @@ INSERT INTO `aktorzy` (`id`, `imie`, `nazwisko`, `data_urodzenia`, `zdjecie`) VA
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `dostepnosc_na_platformach`
+-- Table structure for table `dostepnosc_na_platformach`
 --
 
 CREATE TABLE `dostepnosc_na_platformach` (
@@ -161,7 +161,7 @@ INSERT INTO `dostepnosc_na_platformach` (`id`, `typ_tresci`, `id_tresci`, `id_pl
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `filmy`
+-- Table structure for table `filmy`
 --
 
 CREATE TABLE `filmy` (
@@ -170,29 +170,30 @@ CREATE TABLE `filmy` (
   `rok_produkcji` int(11) NOT NULL,
   `czas_trwania` int(11) NOT NULL,
   `opis` text NOT NULL,
-  `plakat` text NOT NULL
+  `plakat` text NOT NULL,
+  `alt_text` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `filmy`
 --
 
-INSERT INTO `filmy` (`id`, `tytul`, `rok_produkcji`, `czas_trwania`, `opis`, `plakat`) VALUES
-(1, 'Film o pszczołach', 2007, 90, 'Niepozorna pszczoła postanawia położyć kres wyzyskiwaniu swojego gatunku przez ludzkość i rozpoczyna sądową batalię z handlującymi miodem korporacjami.', 'film_o_pszczolach-839201.jpg'),
-(2, 'Skazani na Shawshank', 1994, 142, 'Adaptacja opowiadania Stephena Kinga. Niesłusznie skazany na dożywocie bankier, stara się przetrwać w brutalnym, więziennym świecie.', 'skazani_na_shawshank-482621.jpg'),
-(3, 'Władca Pierścieni: Drużyna Pierścienia', 2001, 178, 'Podróż hobbita z Shire i jego ośmiu towarzyszy, której celem jest zniszczenie potężnego pierścienia pożądanego przez Czarnego Władcę - Saurona. ', 'wladca_pierscieni_druzyna_pierscienia-481902.jpg'),
-(4, 'Ojciec chrzestny', 1972, 175, 'Opowieść o nowojorskiej rodzinie mafijnej. Starzejący się Don Corleone pragnie przekazać władzę swojemu synowi.', 'ojciec_chrzestny-4972112.jpg'),
-(5, 'Coco', 2017, 105, 'Dwunastoletni meksykański chłopiec imieniem Miguel usiłuje zgłębić tajemnice rodzinnej legendy.', 'coco-295731.jpeg'),
-(6, 'Interstellar', 2014, 169, 'Byt ludzkości na Ziemi dobiega końca wskutek zmian klimatycznych. Grupa naukowców odkrywa tunel czasoprzestrzenny, który umożliwia poszukiwanie nowego domu.', 'interstellar-568422.jpg'),
-(7, 'Pulp Fiction', 1994, 154, 'Przemoc i odkupienie w opowieści o dwóch płatnych mordercach pracujących na zlecenie mafii, żonie gangstera, bokserze i parze okradającej ludzi w restauracji.', 'pulp_fiction-581973.jpg'),
-(8, 'Król Lew', 1994, 89, 'Targany niesłusznymi wyrzutami sumienia po śmierci ojca mały lew Simba skazuje się na wygnanie, rezygnując z przynależnego mu miejsca na czele stada.', 'krol_lew-482632.jpg'),
-(9, 'Nietykalni', 2011, 112, 'Sparaliżowany milioner zatrudnia do opieki młodego chłopaka z przedmieścia, który właśnie wyszedł z więzienia.', 'nietykalni-486623.webp'),
-(10, 'Incepcja', 2010, 148, 'Czasy, gdy technologia pozwala na wchodzenie w świat snów. Złodziej Cobb ma za zadanie wszczepić myśl do śpiącego umysłu.', 'incepcja-573326.jpg');
+INSERT INTO `filmy` (`id`, `tytul`, `rok_produkcji`, `czas_trwania`, `opis`, `plakat`, `alt_text`) VALUES
+(1, 'Film o pszczołach', 2007, 90, 'Niepozorna pszczoła postanawia położyć kres wyzyskiwaniu swojego gatunku przez ludzkość i rozpoczyna sądową batalię z handlującymi miodem korporacjami.', 'film_o_pszczolach-839201.jpg', 'Plakat filmu animowanego Film o pszczołach na jasnym, żółtym tle. Na środku uśmiechnięta pszczoła Barry B. Benson z założonymi rękami.'),
+(2, 'Skazani na Shawshank', 1994, 142, 'Adaptacja opowiadania Stephena Kinga. Niesłusznie skazany na dożywocie bankier, stara się przetrwać w brutalnym, więziennym świecie.', 'skazani_na_shawshank-482621.jpg', 'Plakat filmu Skazani na Shawshank przedstawiający mężczyznę stojącego w deszczu z rozłożonymi rękami i głową uniesioną ku górze w geście triumfu/wolności.'),
+(3, 'Władca Pierścieni: Drużyna Pierścienia', 2001, 178, 'Podróż hobbita z Shire i jego ośmiu towarzyszy, której celem jest zniszczenie potężnego pierścienia pożądanego przez Czarnego Władcę - Saurona. ', 'wladca_pierscieni_druzyna_pierscienia-481902.jpg', 'Plakat filmu Władca Pierścieni ukazujący postać Frodo Bagginsa trzymającego pierścień. Wokół niego widoczne są twarze innych bohaterów: Gandalfa, Aragorna, Legolasa i Arweny.'),
+(4, 'Ojciec chrzestny', 1972, 175, 'Opowieść o nowojorskiej rodzinie mafijnej. Starzejący się Don Corleone pragnie przekazać władzę swojemu synowi.', 'ojciec_chrzestny-4972112.jpg', 'Plakat filmu Ojciec chrzestny w sepii, przedstawiający zbliżenie na twarz poważnego, starszego mężczyzny w smokingu.'),
+(5, 'Coco', 2017, 105, 'Dwunastoletni meksykański chłopiec imieniem Miguel usiłuje zgłębić tajemnice rodzinnej legendy.', 'coco-295731.jpeg', 'Kolorowy plakat filmu animowanego Coco. Na pierwszym planie młody chłopiec Miguel trzyma białą gitarę, obok niego stoi uśmiechnięty szkielet Hector oraz radosny pies Dante.'),
+(6, 'Interstellar', 2014, 169, 'Byt ludzkości na Ziemi dobiega końca wskutek zmian klimatycznych. Grupa naukowców odkrywa tunel czasoprzestrzenny, który umożliwia poszukiwanie nowego domu.', 'interstellar-568422.jpg', 'Plakat filmu Interstellar ukazujący astronautę w białym skafandrze idącego przez mroźny, pokryty lodem krajobraz obcej planety. '),
+(7, 'Pulp Fiction', 1994, 154, 'Przemoc i odkupienie w opowieści o dwóch płatnych mordercach pracujących na zlecenie mafii, żonie gangstera, bokserze i parze okradającej ludzi w restauracji.', 'pulp_fiction-581973.jpg', 'Plakat filmu Pulp Fiction w stylu okładki  magazynu. Na łóżku leży kobieta z czarnymi włosami, paląca papierosa, z pistoletem i książką przed sobą.'),
+(8, 'Król Lew', 1994, 89, 'Targany niesłusznymi wyrzutami sumienia po śmierci ojca mały lew Simba skazuje się na wygnanie, rezygnując z przynależnego mu miejsca na czele stada.', 'krol_lew-482632.jpg', 'Plakat filmu animowanego Król Lew. Na pierwszym planie widać dumny profil dorosłego lwa Mufasy oraz młodszą lwicę Nalę. Obok nich na skale stoją Rafiki, Timon i Pumba.'),
+(9, 'Nietykalni', 2011, 112, 'Sparaliżowany milioner zatrudnia do opieki młodego chłopaka z przedmieścia, który właśnie wyszedł z więzienia.', 'nietykalni-486623.webp', 'Plakat filmu Nietykalni przedstawiający dwóch smiejących się mężczyzn: jeden siedzi na wózku inwalidzkim, a drugi go pcha.'),
+(10, 'Incepcja', 2010, 148, 'Czasy, gdy technologia pozwala na wchodzenie w świat snów. Złodziej Cobb ma za zadanie wszczepić myśl do śpiącego umysłu.', 'incepcja-573326.jpg', 'Plakat filmu Incepcja przedstawiający grupę osób stojących na środku miejskiej ulicy. Nad nimi miasto nienaturalnie zagina się pod kątem prostym, tworząc surrealistyczny sufit z budynków.');
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `kategorie`
+-- Table structure for table `kategorie`
 --
 
 CREATE TABLE `kategorie` (
@@ -226,7 +227,7 @@ INSERT INTO `kategorie` (`id`, `nazwa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `kategorie_tresci`
+-- Table structure for table `kategorie_tresci`
 --
 
 CREATE TABLE `kategorie_tresci` (
@@ -287,7 +288,7 @@ INSERT INTO `kategorie_tresci` (`id`, `typ_tresci`, `id_tresci`, `id_kategorii`)
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `komentarze`
+-- Table structure for table `komentarze`
 --
 
 CREATE TABLE `komentarze` (
@@ -310,7 +311,7 @@ INSERT INTO `komentarze` (`id`, `typ_tresci`, `id_tresci`, `nazwa_uzytkownika`, 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `oceny`
+-- Table structure for table `oceny`
 --
 
 CREATE TABLE `oceny` (
@@ -331,7 +332,7 @@ INSERT INTO `oceny` (`id`, `typ_tresci`, `id_tresci`, `ocena`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `platformy`
+-- Table structure for table `platformy`
 --
 
 CREATE TABLE `platformy` (
@@ -356,7 +357,7 @@ INSERT INTO `platformy` (`id`, `nazwa`, `ikona`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `produkcje_rezyserow`
+-- Table structure for table `produkcje_rezyserow`
 --
 
 CREATE TABLE `produkcje_rezyserow` (
@@ -400,7 +401,7 @@ INSERT INTO `produkcje_rezyserow` (`id`, `typ_tresci`, `id_tresci`, `id_rezysera
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `rezyserzy`
+-- Table structure for table `rezyserzy`
 --
 
 CREATE TABLE `rezyserzy` (
@@ -443,7 +444,7 @@ INSERT INTO `rezyserzy` (`id`, `imie`, `nazwisko`, `data_urodzenia`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `seriale`
+-- Table structure for table `seriale`
 --
 
 CREATE TABLE `seriale` (
@@ -452,29 +453,30 @@ CREATE TABLE `seriale` (
   `rok_produkcji` text NOT NULL,
   `ilosc_sezonow` int(11) NOT NULL,
   `opis` text NOT NULL,
-  `plakat` text NOT NULL
+  `plakat` text NOT NULL,
+  `alt_text` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `seriale`
 --
 
-INSERT INTO `seriale` (`id`, `tytul`, `rok_produkcji`, `ilosc_sezonow`, `opis`, `plakat`) VALUES
-(1, 'Czarnobyl', '2019', 1, 'Po wybuchu elektrowni jądrowej w Czarnobylu ratownicy poświęcają zdrowie i życie, by ratować Europę przed skutkami katastrofy.', 'czarnobyl-482362.jpg'),
-(2, 'Breaking Bad', '2008 - 2013', 5, 'Gdy nauczyciel chemii dowiaduje się, że ma raka, postanawia rozpocząć produkcję metamfetaminy, by finansowo zabezpieczyć swoją rodzinę.', 'breaking_bad-234821.jpg'),
-(3, 'Gra o tron', '2011 - 2019', 8, 'Adaptacja sagi George\'a R.R. Martina. W królestwie Westeros walka o władzę, spiski oraz zbrodnie są na porządku dziennym.', 'gra_o_tron-523412.jpg'),
-(4, 'Nasza planeta', '2019 - 2023', 2, 'Widowiskowe ujęcia rzadko spotykanych zwierząt zostają zestawione z gorzkimi refleksjami o wpływie ludzkości na ich siedliska i inne gatunki zamieszkujące naszą planetę.', 'nasza_planeta-634531.webp'),
-(5, 'Kompania braci', '2001', 1, 'Losy Kompanii E, 506 pułku piechoty spadochronowej, 101 Dywizji Powietrznodesantowej Armii USA opowiedziane z perspektywy tych, którzy przeżyli drugą wojnę światową. ', 'kompania_braci-587236.jpg'),
-(6, 'Biuro', '2005 - 2013', 9, 'Kamery towarzyszą pracownikom oddziału firmy sprzedającej artykuły papierowe w czasie ich codziennych obowiązków.', 'biuro-571623.jpg'),
-(7, 'Rick i Morty', '2013', 8, 'Ekscentryczny naukowiec Rick udaje się ze swoim wnukiem Mortym do najdziwniejszych miejsc w galaktyce i alternatywnych rzeczywistości.', 'rick_i_morty-343212.jpg'),
-(8, 'Peaky Blinders', '2013 - 2022', 6, 'Należący do gangsterskiej rodziny z Birmingham Tommy Shelby usiłuje zwiększyć swoje wpływy, wykorzystując skradziony transport broni.', 'peaky_blinders-636386.jpg'),
-(9, 'Sherlock', '2010 - 2017', 4, 'John Watson jest lekarzem wojskowym, który niedawno wrócił z wojny. Gdy poznaje genialnego detektywa Sherlocka Holmesa, zaczyna pomagać mu w rozwiązywaniu zagadek kryminalnych.', 'sherlock-627412.jpg'),
-(10, 'BoJack Horseman', '2014 - 2020', 6, 'BoJack Horseman, koń-aktor znany z emitowanego w latach 90. sitcomu, próbuje ratować swoją karierę w brutalnym świecie gwiazd i celebrytów.', 'bojack_horseman-458282.jpg');
+INSERT INTO `seriale` (`id`, `tytul`, `rok_produkcji`, `ilosc_sezonow`, `opis`, `plakat`, `alt_text`) VALUES
+(1, 'Czarnobyl', '2019', 1, 'Po wybuchu elektrowni jądrowej w Czarnobylu ratownicy poświęcają zdrowie i życie, by ratować Europę przed skutkami katastrofy.', 'czarnobyl-482362.jpg', 'Plakat serialu Czarnobyl przedstawiający osobę w kombinezonie ochronnym i masce gazowej.'),
+(2, 'Breaking Bad', '2008 - 2013', 5, 'Gdy nauczyciel chemii dowiaduje się, że ma raka, postanawia rozpocząć produkcję metamfetaminy, by finansowo zabezpieczyć swoją rodzinę.', 'breaking_bad-234821.jpg', 'Plakat serialu Breaking Bad przedstawiający Waltera White\'a w żółtym kombinezonie ochronnym siedzącego obok stosu pieniędzy.'),
+(3, 'Gra o tron', '2011 - 2019', 8, 'Adaptacja sagi George\'a R.R. Martina. W królestwie Westeros walka o władzę, spiski oraz zbrodnie są na porządku dziennym.', 'gra_o_tron-523412.jpg', 'Plakat serialu Gra o Tron przedstawiający Daenerys Targaryen o platynowych blond włosach, siedzącą na Żelaznym Tronie.'),
+(4, 'Nasza planeta', '2019 - 2023', 2, 'Widowiskowe ujęcia rzadko spotykanych zwierząt zostają zestawione z gorzkimi refleksjami o wpływie ludzkości na ich siedliska i inne gatunki zamieszkujące naszą planetę.', 'nasza_planeta-634531.webp', 'Plakat dokumentu Nasza Planeta II przedstawiający grupę pingwinów skalnych.'),
+(5, 'Kompania braci', '2001', 1, 'Losy Kompanii E, 506 pułku piechoty spadochronowej, 101 Dywizji Powietrznodesantowej Armii USA opowiedziane z perspektywy tych, którzy przeżyli drugą wojnę światową. ', 'kompania_braci-587236.jpg', 'Plakat serialu Kompania Braci ukazujący sylwetki żołnierzy z karabinami, stojących w rzędzie.'),
+(6, 'Biuro', '2005 - 2013', 9, 'Kamery towarzyszą pracownikom oddziału firmy sprzedającej artykuły papierowe w czasie ich codziennych obowiązków.', 'biuro-571623.jpg', 'Plakat serialu Biuro przedstawiający kolaż postaci takich jak Michael Scott, Dwight Schrute, Jim Halpert i Pam Beesly.'),
+(7, 'Rick i Morty', '2013', 8, 'Ekscentryczny naukowiec Rick udaje się ze swoim wnukiem Mortym do najdziwniejszych miejsc w galaktyce i alternatywnych rzeczywistości.', 'rick_i_morty-343212.jpg', 'Plakat serialu Rick i Morty w jaskrawych, zielonych barwach, przedstawiający główne postacie ubrudzone czerwonym sosem spaghetti.'),
+(8, 'Peaky Blinders', '2013 - 2022', 6, 'Należący do gangsterskiej rodziny z Birmingham Tommy Shelby usiłuje zwiększyć swoje wpływy, wykorzystując skradziony transport broni.', 'peaky_blinders-636386.jpg', 'Plakat serialu Peaky Blinders z głównym bohaterem Thomasem Shelby’m na pierwszym planie, otoczonym przez członków swojej rodziny i gangu.'),
+(9, 'Sherlock', '2010 - 2017', 4, 'John Watson jest lekarzem wojskowym, który niedawno wrócił z wojny. Gdy poznaje genialnego detektywa Sherlocka Holmesa, zaczyna pomagać mu w rozwiązywaniu zagadek kryminalnych.', 'sherlock-627412.jpg', 'Plakat serialu Sherlock przedstawiający Sherlocka Holmesa siedzącego w fotelu i doktora Johna Watsona stojącego za nim w zniszczonym, opuszczonym pokoju.'),
+(10, 'BoJack Horseman', '2014 - 2020', 6, 'BoJack Horseman, koń-aktor znany z emitowanego w latach 90. sitcomu, próbuje ratować swoją karierę w brutalnym świecie gwiazd i celebrytów.', 'bojack_horseman-458282.jpg', 'Animowany plakat serialu BoJack Horseman pokazujący plecy człowieka-konia w garniturze, patrzącego na zachód słońca nad oceanem.');
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `wystepy_aktorow`
+-- Table structure for table `wystepy_aktorow`
 --
 
 CREATE TABLE `wystepy_aktorow` (
@@ -541,86 +543,86 @@ INSERT INTO `wystepy_aktorow` (`id`, `typ_tresci`, `id_tresci`, `id_aktora`, `ro
 (49, 'serial', 10, 32, 'Todd Chavez');
 
 --
--- Indeksy dla zrzutów tabel
+-- Indexes for dumped tables
 --
 
 --
--- Indeksy dla tabeli `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `aktorzy`
+-- Indexes for table `aktorzy`
 --
 ALTER TABLE `aktorzy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `dostepnosc_na_platformach`
+-- Indexes for table `dostepnosc_na_platformach`
 --
 ALTER TABLE `dostepnosc_na_platformach`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_platformy` (`id_platformy`);
 
 --
--- Indeksy dla tabeli `filmy`
+-- Indexes for table `filmy`
 --
 ALTER TABLE `filmy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `kategorie`
+-- Indexes for table `kategorie`
 --
 ALTER TABLE `kategorie`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `kategorie_tresci`
+-- Indexes for table `kategorie_tresci`
 --
 ALTER TABLE `kategorie_tresci`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_kategorii` (`id_kategorii`);
 
 --
--- Indeksy dla tabeli `komentarze`
+-- Indexes for table `komentarze`
 --
 ALTER TABLE `komentarze`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `oceny`
+-- Indexes for table `oceny`
 --
 ALTER TABLE `oceny`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `platformy`
+-- Indexes for table `platformy`
 --
 ALTER TABLE `platformy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `produkcje_rezyserow`
+-- Indexes for table `produkcje_rezyserow`
 --
 ALTER TABLE `produkcje_rezyserow`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_rezysera` (`id_rezysera`);
 
 --
--- Indeksy dla tabeli `rezyserzy`
+-- Indexes for table `rezyserzy`
 --
 ALTER TABLE `rezyserzy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `seriale`
+-- Indexes for table `seriale`
 --
 ALTER TABLE `seriale`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `wystepy_aktorow`
+-- Indexes for table `wystepy_aktorow`
 --
 ALTER TABLE `wystepy_aktorow`
   ADD PRIMARY KEY (`id`),
@@ -688,7 +690,7 @@ ALTER TABLE `platformy`
 -- AUTO_INCREMENT for table `produkcje_rezyserow`
 --
 ALTER TABLE `produkcje_rezyserow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `rezyserzy`
