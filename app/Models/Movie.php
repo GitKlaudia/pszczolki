@@ -3,13 +3,13 @@ require_once 'Model.php';
 
 class Movie extends Model
 {
-    public function all(): array
-    {
-        $result = $this->db->query(
-            "SELECT id, tytul, rok_produkcji, czas_trwania, opis, plakat FROM filmy"
-        );
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
+   public function all(): array
+{
+    $result = $this->db->query(
+        "SELECT id, tytul, rok_produkcji, czas_trwania, opis, plakat, alt_text FROM filmy"
+    );
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 
     public function find(int $id): ?array
     {

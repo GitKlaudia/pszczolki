@@ -89,8 +89,10 @@
                             <div class="itemCard">
                                 <a href="index.php?controller=details&action=index&type=film&id=<?= (int)$film['id']; ?>" class="itemCardPosterLink">
                                     <div class="itemCardPoster" 
-                                         style="background-image: url('plakaty_filmow/<?php echo htmlspecialchars($film['plakat']); ?>');"></div>
-                                </a>
+                                        role="img"
+                                        aria-label="<?= !empty($film['alt_text']) ? htmlspecialchars($film['alt_text']) : 'Plakat filmu ' . htmlspecialchars($film['tytul']); ?>"
+                                        style="background-image: url('plakaty_filmow/<?php echo htmlspecialchars($film['plakat']); ?>');">
+                                    </div>
                                 <div class="itemCardFooter">
                                     <div class="itemCardTitle">
                                         <?php echo htmlspecialchars($film['tytul']); ?>
@@ -115,9 +117,11 @@
                     <?php foreach ($seriale as $serial): ?>
                         <div class="itemCard">
                             <a href="index.php?controller=details&action=index&type=serial&id=<?= (int)$serial['id']; ?>" class="itemCardPosterLink">
-                                <div class="itemCardPoster" 
-                                     style="background-image: url('plakaty_seriali/<?php echo htmlspecialchars($serial['plakat']); ?>');"></div>
-                            </a>
+                               <div class="itemCardPoster" 
+                                    role="img"
+                                    aria-label="<?= !empty($serial['alt_text']) ? htmlspecialchars($serial['alt_text']) : 'Plakat serialu ' . htmlspecialchars($serial['tytul']); ?>"
+                                    style="background-image: url('plakaty_seriali/<?php echo htmlspecialchars($serial['plakat']); ?>');">
+                                </div>
                             <div class="itemCardFooter">
                                 <div class="itemCardTitle"><?php echo htmlspecialchars($serial['tytul']); ?></div>
                                 <button class="likeBtn">♡</button>

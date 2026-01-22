@@ -25,7 +25,9 @@
     </header>
 
     <div id="detailsWrapper">
-        <img id="banner" src="<?= $posterDir . htmlspecialchars($item['plakat']); ?>">
+        <img id="banner" 
+            src="<?= $posterDir . htmlspecialchars($item['plakat']); ?>" 
+            alt="Banner filmu <?= htmlspecialchars($item['tytul']); ?>">
 
         <div id="rating">
             Ocena: <?= $rating !== null ? $rating . '/10' : 'Brak ocen'; ?>
@@ -56,7 +58,9 @@
             </div>
         </div>
 
-        <img id="moviePoster" src="<?= $posterDir . htmlspecialchars($item['plakat']); ?>">
+        <img id="moviePoster" 
+            src="<?= $posterDir . htmlspecialchars($item['plakat']); ?>" 
+            alt="<?= !empty($item['alt_text']) ? htmlspecialchars($item['alt_text']) : 'Plakat: ' . htmlspecialchars($item['tytul']); ?>">
 
         <div id="description">
             <?= nl2br(htmlspecialchars($item['opis'])); ?>
@@ -119,7 +123,8 @@
                         <?php foreach ($actors as $actor): ?>
                             <div class="castPersonWrapper">
                                 <img class="castPersonImage"
-                                     src="<?= $actor['zdjecie'] ? 'zdjecia_aktorow/' . htmlspecialchars($actor['zdjecie']) : 'styles/default_actor.png'; ?>">
+                                    src="<?= $actor['zdjecie'] ? 'zdjecia_aktorow/' . htmlspecialchars($actor['zdjecie']) : 'styles/default_actor.png'; ?>"
+                                    alt="<?= !empty($actor['alt_text']) ? htmlspecialchars($actor['alt_text']) : htmlspecialchars($actor['imie'] . ' ' . $actor['nazwisko']); ?>">
                                 <div class="castPersonName"><?= htmlspecialchars($actor['imie'] . ' ' . $actor['nazwisko']); ?></div>
                                 <?php if (!empty($actor['rola'])): ?>
                                     <div class="castPersonRole"><?= htmlspecialchars($actor['rola']); ?></div>
