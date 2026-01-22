@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     searchBtn.addEventListener('click', () => {
 
-
         const categorySection = Array.from(document.querySelectorAll('.searchSection'))
             .find(sec => sec.querySelector('.searchSectionHeader').innerText.toLowerCase() === 'kategoria');
         const selectedCategories = categorySection ? categorySection.querySelectorAll('.searchTag.active') : [];
@@ -27,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const type = selectedTypeTag ? selectedTypeTag.textContent.trim().toLowerCase() : 'serial';
 
         const params = new URLSearchParams();
+        params.set('controller', 'search');
+        params.set('action', 'index');
         params.set('type', type);
         
         if (categories.length > 0) {
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             params.set('platforms', platforms.join(','));
         }
 
-        window.location.href = 'search.php?' + params.toString();
+        window.location.href = 'index.php?' + params.toString();
     });
 
 });
