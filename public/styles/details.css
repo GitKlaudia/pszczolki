@@ -320,6 +320,29 @@
     flex-shrink: 0;
 }
 
+#commentText {
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+}
+
+#submitCommentBtn {
+    background-color: #eaca3f;
+    color: white; 
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 10px;
+    transition: filter 0.2s;
+}
+
+#submitCommentBtn:hover {
+    filter: brightness(1.1);
+}
+
 @media (max-width: 900px) {
     #detailsWrapper {
         display: flex;
@@ -479,7 +502,6 @@
         margin-left: 10px;
         font-size: 24px;
     }
-
 
     #cast {
         order: 8;

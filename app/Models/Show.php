@@ -104,7 +104,7 @@ class Show extends Model
     public function getComments(int $id): array
     {
         $stmt = $this->db->prepare(
-            "SELECT nazwa_uzytkownika, komentarz, polubienia
+            "SELECT id, nazwa_uzytkownika, komentarz, polubienia
              FROM komentarze
              WHERE typ_tresci = 'serial' AND id_tresci = ?"
         );
@@ -114,6 +114,41 @@ class Show extends Model
         $comments = $res->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
         return $comments;
+    }
+
+    public function addComment(int $id, string $commentText): void
+    {
+        $stmt = $this->db->prepare(
+            "INSERT INTO komentarze (typ_tresci, id_tresci, nazwa_uzytkownika, komentarz, polubienia)
+             VALUES ('serial', ?, 'Anonim', ?, 0)"
+        );
+        $stmt->bind_param("is", $id, $commentText);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function likeComment(int $commentId): void
+    {
+        $stmt = $this->db->prepare(
+            "UPDATE komentarze
+             SET polubienia = polubienia + 1
+             WHERE id = ?"
+        );
+        $stmt->bind_param("i", $commentId);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function unlikeComment(int $commentId): void
+    {
+        $stmt = $this->db->prepare(
+            "UPDATE komentarze
+             SET polubienia = GREATEST(polubienia - 1, 0)
+             WHERE id = ?"
+        );
+        $stmt->bind_param("i", $commentId);
+        $stmt->execute();
+        $stmt->close();
     }
 
     public function searchByTitle(string $q): array

@@ -79,14 +79,102 @@
                         <img class="commentUserAvatar">
                         <div class="commentContent"><?= htmlspecialchars($comment['komentarz']); ?></div>
                         <div class="commentLikes">
-                            <div class="commentLikeCount"><?= (int)$comment['polubienia']; ?></div>
-                            <button class="commentLikeBtn">♡</button>
+                            <div id="commentLikeCount-<?= (int)$comment['id']; ?>" class="commentLikeCount"><?= (int)$comment['polubienia']; ?></div>
+                            <button id="commentLikeBtn-<?= (int)$comment['id']; ?>" class="commentLikeBtn">♡</button>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const commentLikeCount = document.getElementById('commentLikeCount-<?= (int)$comment['id']; ?>');
+                                    const commentLikeBtn = document.getElementById('commentLikeBtn-<?= (int)$comment['id']; ?>');
+                                    let liked = false;
+                                    
+                                    let value = `; ${document.cookie}`;
+                                    let parts = value.split(`; commentLikes=`);
+                                    let commentLikesCookie = '';
+                                    let likedComments = [];
+                                    // Sprawdzenie czy cookie z polubieniami istnieje
+                                    if (parts.length === 2) {
+                                        commentLikesCookie = decodeURIComponent(parts.pop().split(';').shift());
+                                        likedComments = commentLikesCookie ? commentLikesCookie.split(',') : [];
+                                        // Sprawdzenie czy ten komentarz jest polubiony
+                                        if (likedComments.includes('<?= (int)$comment['id']; ?>')) {
+                                            commentLikeBtn.innerHTML = '<button class="commentLikeBtn">♥︎</button>';
+                                            liked = true;
+                                        }
+                                    } else {
+                                        // Dodanie cookie z polubieniami jeśli nie istnieje
+                                        const d = new Date();
+                                        d.setTime(d.getTime() + (400*24*60*60*1000));
+                                        let expires = "expires="+ d.toUTCString();
+                                        document.cookie = "commentLikes=0;" + expires + ";path=/";
+                                        value = `; ${document.cookie}`;
+                                        parts = value.split(`; commentLikes=`);
+                                        commentLikesCookie = decodeURIComponent(parts.pop().split(';').shift());
+                                        likedComments = commentLikesCookie ? commentLikesCookie.split(',') : [];
+                                    }
+
+                                    commentLikeBtn.addEventListener('click', function() {
+                                        if (!liked) {
+                                            // Dodanie polubienia
+
+                                            // Aktualizacja DB
+                                            fetch('index.php?controller=details&action=likeComment&type=<?= htmlspecialchars($type); ?>', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                                },
+                                                body: 'commentId=<?= (int)$comment['id']; ?>'
+                                            });
+
+                                            // Aktualizacja cookie
+                                            commentLikesCookie += ',<?= (int)$comment['id']; ?>';
+                                            const d = new Date();
+                                            d.setTime(d.getTime() + (400*24*60*60*1000));
+                                            let expires = "expires="+ d.toUTCString();
+                                            document.cookie = "commentLikes=" + commentLikesCookie + ";" + expires + ";path=/";
+                                            
+                                            // Aktualizacja frontendu
+                                            commentLikeCount.textContent = parseInt(commentLikeCount.textContent) + 1;
+                                            commentLikeBtn.innerHTML = '<button class="commentLikeBtn">♥︎</button>';
+                                            liked = true;
+                                        } else {
+                                            // Usunięcie polubienia
+
+                                            // Aktualizacja DB
+                                            fetch('index.php?controller=details&action=unlikeComment&type=<?= htmlspecialchars($type); ?>', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                                },
+                                                body: 'commentId=<?= (int)$comment['id']; ?>'
+                                            });
+
+                                            // Aktualizacja cookie
+                                            likedComments = likedComments.filter(id => id !== '<?= (int)$comment['id']; ?>');
+                                            commentLikesCookie = likedComments.join(',');
+                                            const d = new Date();
+                                            d.setTime(d.getTime() + (400*24*60*60*1000));
+                                            let expires = "expires="+ d.toUTCString();
+                                            document.cookie = "commentLikes=" + commentLikesCookie + ";" + expires + ";path=/";
+                                            
+                                            // Aktualizacja frontendu
+                                            commentLikeCount.textContent = parseInt(commentLikeCount.textContent) - 1;
+                                            commentLikeBtn.innerHTML = '<button class="commentLikeBtn">♡</button>';
+                                            liked = false;
+                                        }
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>Brak komentarzy.</p>
             <?php endif; ?>
+            <form id="addCommentForm" method="post" action="index.php?controller=details&action=addComment&type=<?= htmlspecialchars($type); ?>&id=<?= (int)$item['id']; ?>">
+                <textarea name="commentText" id="commentText" placeholder="Twój komentarz..." rows="5" cols="40" required maxlength="500"></textarea>
+                <br>
+                <button type="submit" id="submitCommentBtn">Skomentuj</button>
+            </form>
         </div>
 
         <div id="whereToWatch">
@@ -143,5 +231,21 @@
 <script src="js/suggestions.js"></script>
 <script src="js/themeToggle.js"></script>
 <script src="js/scroll.js"></script>
+
+<?php if (isset($msg)): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const msg = "<?= htmlspecialchars($msg); ?>";
+            if (msg === 'empty_comment') {
+                alert('Komentarz nie może być pusty.');
+            } else if (msg === 'comment_too_long') {
+                alert('Komentarz nie może przekraczać 500 znaków.');
+            } else if (msg === 'comment_added') {
+                alert('Komentarz został dodany pomyślnie.');
+            }
+        });
+    </script>
+<?php endif; ?>
+
 </body>
 </html>
