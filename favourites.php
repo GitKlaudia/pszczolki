@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/common.css" rel="stylesheet">
+    <link href="styles/favandsearch.css" rel="stylesheet">
+    <title>B-Movie</title>
+</head>
+<body>
+    <header>
+        <a href="index.php" id="headerLogoAndTitle" style="text-decoration: none;">
+            <img id="headerLogo" src="styles/logo.svg">
+            <div id="headerTitle">B-Movie</div>
+        </a>
+        <div id="centerSection">
+            <div id="searchBar">
+                <input type="text" id="searchInput" placeholder="Wyszukaj...">
+                <img id="searchIcon" src="styles/searchIcon.svg">
+            </div>
+        </div>
+        <div id="navBar">
+                <a href="search.php" class="navItem" id="navMovies">Filmy</a>
+                <a href="search.php" class="navItem" id="navShows">Seriale</a>
+                <a href="favourites.php" class="navItem" id="navFav">Polubione</a>
+                <button id="themeToggle" title="Zmień motyw">
+                <img id="themeIcon" src="styles/light.svg" alt="Motyw">
+                </button>
+                </div>
+    </header>
+    <div id="favouritesWrapper">
+        <div id="favouritesTitle">Lista ulubionych</div>
+
+<div class="favouriteItem">
+    <img class="poster">
+    <div class="movieContent">
+        <div class="movieHeader">
+            <div class="title">Tytuł</div>
+            <div class="year">Rok</div>
+            <div class="duration">Czas trwania</div>
+        </div>
+        <div class="description">
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <div class="genres">gatunki</div>
+        <div class="director">reżyseria</div>
+
+        <div class="ratingSection">
+            <div class="rating">Ocena: 5/10</div>
+            <button class="likeBtn">♡</button>
+        </div>
+    </div>
+   <div id="whereToWatch">
+    <div id="whereToWatchTitle">Gdzie obejrzeć?</div>
+    <div id="vodLinks">
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="favouriteItem">
+    <img class="poster">
+    <div class="movieContent">
+        <div class="movieHeader">
+            <div class="title">Tytuł</div>
+            <div class="year">Rok</div>
+            <div class="duration">Czas trwania</div>
+        </div>
+        <div class="description">
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <div class="genres">gatunki</div>
+        <div class="director">reżyseria</div>
+
+        <div class="ratingSection">
+            <div class="rating">Ocena: 8/10</div>
+            <button class="likeBtn">♡</button>
+        </div>
+    </div>
+   <div id="whereToWatch">
+    <div id="whereToWatchTitle">Gdzie obejrzeć?</div>
+    <div id="vodLinks">
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="favouriteItem">
+    <img class="poster">
+    <div class="movieContent">
+        <div class="movieHeader">
+            <div class="title">Tytuł</div>
+            <div class="year">Rok</div>
+            <div class="duration">Czas trwania</div>
+        </div>
+        <div class="description">
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <div class="genres">gatunki</div>
+        <div class="director">reżyseria</div>
+
+        <div class="ratingSection">
+            <div class="rating">Ocena: 7/10</div>
+            <button class="likeBtn">♡</button>
+        </div>
+    </div>
+   <div id="whereToWatch">
+    <div id="whereToWatchTitle">Gdzie obejrzeć?</div>
+    <div id="vodLinks">
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="favouriteItem">
+    <img class="poster">
+    <div class="movieContent">
+        <div class="movieHeader">
+            <div class="title">Tytuł</div>
+            <div class="year">Rok</div>
+            <div class="duration">Czas trwania</div>
+        </div>
+        <div class="description">
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <div class="genres">gatunki</div>
+        <div class="director">reżyseria</div>
+
+        <div class="ratingSection">
+            <div class="rating">Ocena: 7/10</div>
+            <button class="likeBtn">♡</button>
+        </div>
+    </div>
+   <div id="whereToWatch">
+    <div id="whereToWatchTitle">Gdzie obejrzeć?</div>
+    <div id="vodLinks">
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+        <div class="vodLink">
+            <img class="vodIcon">
+            <div class="vodLinkText">link</div>
+        </div>
+    </div>
+</div>
+</div>      
+</body>
+<script src="themeToggle.js"></script>
+</html>

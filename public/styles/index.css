@@ -1,0 +1,519 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: DM Sans, sans-serif;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #000; 
+    overflow-x: hidden; 
+}
+
+header {
+    background-color: #eaca3f;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0 20px;
+}
+
+#headerLogoAndTitle {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#headerLogo {
+    height: 60px;
+    width: auto;
+    margin-right: 10px;
+}
+
+#headerTitle {
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+}
+
+#centerSection {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    justify-content: center;
+}
+
+.advSearch{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid #a7933d;
+    border-radius: 8px;
+    background-color: transparent;
+    color: black;
+    text-decoration: none;
+     transition: all 0.3s ease;
+}
+.advSearch:hover {
+    background-color: #ffd50053;
+    cursor: pointer;
+     transform: scale(1.1);
+}
+
+   
+
+
+@media (max-width: 768px) {
+    #centerSection {
+        order: 3;
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+#searchBar {
+        width: 100%;
+        position: relative;
+    }
+    
+    #searchInput {
+        width: 100%;
+        height: 50px;
+        background-color: #fff;
+        border: 3px solid #a7933d; 
+        border-radius: 12px;
+        padding: 0 45px 0 15px;
+        font-size: 18px;
+        color: #000;
+        box-sizing: border-box;
+    }
+    #searchIcon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 20px;
+        filter: brightness(0);
+    }
+
+@media (max-width: 1024px) {
+    #searchInput {
+        width: 200px;
+    }
+    #headerTitle, #navBar {
+        font-size: 20px !important;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1300px) {
+    #searchInput {
+        width: 300px;
+    }
+    #headerTitle, #navBar {
+        font-size: 35px !important;
+    }
+}
+
+#searchIcon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: auto;
+}
+
+#mobileSearchBar {
+    display: none;
+    margin: 0 0 30px 0;
+    position: relative;
+    justify-content: center;
+}
+
+#mobileSearchInput {
+    width: 500px;
+    padding: 10px 40px 10px 10px;
+    border-radius: 10px;
+    border: 3px solid #a7933d;
+    font-size: 16px;
+}
+
+#mobileSearchInput::placeholder {
+    color: black;
+}
+
+#mobileSearchIcon {
+    position: relative;
+    right: 35px;
+    margin-top: 20px;
+    transform: translateY(-50%);
+    height: 20px;
+    width: auto;
+}
+
+
+
+@media (max-width: 768px) {
+    #navBar {
+        display: none;
+    }
+}
+
+
+
+#adminBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-right: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    color:#000;
+}
+
+#adminBtnIcon {
+    margin-left: 10px;
+}
+
+#mainBanner {
+    min-height: 400px;
+    height: auto;
+    margin-top: 80px;
+    background-color: #eaca3f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-image: url('indexbg.png');
+    background-size: 2600px, cover;
+}
+
+@media (min-width: 769px) {
+    #mainBanner {
+        min-height: 700px;
+        padding: 60px 40px;
+    }
+}
+
+#mainBannerRowsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.mainBannerRows {
+    font-size: 60px;
+    font-weight: bold;
+    color: black;
+    margin: 0;
+}
+
+#mainBannerHighlitedText {
+    color: white;
+    -webkit-text-stroke: 2px #cf8600;
+}
+
+#contentSections {
+    background-color: black;
+    padding: 20px;
+    background-image: url('honeybg.png');
+    background-size: 1000px, cover;
+}
+
+@media (min-width: 768px) {
+    #contentSections {
+        padding: 60px 40px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #contentSections {
+        padding: 100px;
+    }
+}
+#mobileNavBar {
+    display: none;
+    gap: 40px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.mobileNavBarItem {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 15px 0;
+}
+
+.searchBtn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: #555;
+    font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    #mobileNavBar {
+        gap: 60px;
+        display: flex;
+    }
+    
+    #mobileSearchBar {
+        display: flex;
+    }
+
+    #centerSection, #adminBtn {
+        display: none;
+    }
+
+    #headerLogoAndTitle {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+    }
+
+    header {
+        position: absolute;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    #mainBanner {
+        margin-top: 0;
+        padding: 0;
+    }    
+}
+
+.carouselWrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 60px;
+}
+
+.carouselItems {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    flex: 1;
+    padding: 0;
+}
+
+.carouselItems::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carouselBtn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #666;
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+.carouselBtn:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: #ffd50053;
+}
+
+#SerialWrapper, #MovieWrapper {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+@media (max-width: 1300px) {
+    #SerialWrapper, #MovieWrapper {
+        justify-content: flex-start !important;
+    }
+}
+
+.sectionTitle {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.itemCard {
+    height: auto;
+    width: 180px;
+    flex-shrink: 0;
+}
+.itemCardPoster:hover {
+    transform: scale(1.05);
+    transition: transform 0.4s ease;
+    cursor: pointer;
+}
+
+.itemCardPoster {
+    width: 100%;
+    background-color: #3d3d3d;
+    aspect-ratio: 2 / 3;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+}
+
+.itemCardFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.itemCardTitle {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    flex: 1;
+}
+
+.likeBtn {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: none;
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+#likedLink {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 60px;
+    padding-top: 60px;
+}
+
+#likedLinkArrow {
+    margin-left: 10px;
+}
+
+.inputWithSuggestions {
+    position: relative;
+}
+
+.suggestionsBox {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 100%;
+    background-color: #fff; 
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.suggestionsBox.active {
+    display: block;
+}
+
+
+.advancedSearchInput:focus + .suggestionsBox,
+.suggestionsBox:active {
+    display: block;
+}
+
+.suggestion {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.suggestion:last-child {
+    border-bottom: none;
+}
+
+.suggestion:hover {
+    background-color: #eaca3f; 
+    color: black;
+}
+
+
+/* Motyw jasny */
+body.light-mode {
+    background-color: #f5f5f5 !important;
+    color: #1a1a1a !important;
+}
+
+body.light-mode header,
+body.light-mode #mainBanner {
+    background-color: #ffd54f !important;
+}
+
+body.light-mode #headerTitle,
+body.light-mode .navItem,
+body.light-mode .mainBannerRows {
+    color: #000 !important;
+    -webkit-text-stroke: 0px !important; 
+}
+
+body.light-mode #contentSections {
+    background-color: #ffffff !important;
+    background-image: url('lighthoneybg.png');
+    background-size: 1000px, cover;
+}
+
+body.light-mode .sectionTitle,
+body.light-mode .itemCardTitle,
+body.light-mode .mobileNavBarItem {
+    color: #1a1a1a !important;
+}
+
+body.light-mode .itemCardPoster {
+    background-color: #e0e0e0 !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+body.light-mode .suggestionsBox {
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+body.light-mode .suggestion {
+    color: #333;
+}
+
+body.light-mode .suggestion:hover {
+    background-color: #ffd54f;
+}
+
+body.light-mode .carouselBtn {
+    border-color: #333 !important;
+    color: #333 !important;
+}
+
+body.light-mode #themeToggle {
+    background-color: #333;
+    color: #fff;
+}
+
+
