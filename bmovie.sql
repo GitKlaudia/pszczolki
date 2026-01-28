@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2026 at 12:45 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Generation Time: Sty 29, 2026 at 12:12 AM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Struktura tabeli dla tabeli `admin`
 --
 
 CREATE TABLE `admin` (
@@ -43,7 +43,7 @@ INSERT INTO `admin` (`id`, `login`, `haslo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aktorzy`
+-- Struktura tabeli dla tabeli `aktorzy`
 --
 
 CREATE TABLE `aktorzy` (
@@ -110,7 +110,7 @@ INSERT INTO `aktorzy` (`id`, `imie`, `nazwisko`, `data_urodzenia`, `zdjecie`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dostepnosc_na_platformach`
+-- Struktura tabeli dla tabeli `dostepnosc_na_platformach`
 --
 
 CREATE TABLE `dostepnosc_na_platformach` (
@@ -161,7 +161,7 @@ INSERT INTO `dostepnosc_na_platformach` (`id`, `typ_tresci`, `id_tresci`, `id_pl
 -- --------------------------------------------------------
 
 --
--- Table structure for table `filmy`
+-- Struktura tabeli dla tabeli `filmy`
 --
 
 CREATE TABLE `filmy` (
@@ -193,7 +193,7 @@ INSERT INTO `filmy` (`id`, `tytul`, `rok_produkcji`, `czas_trwania`, `opis`, `pl
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategorie`
+-- Struktura tabeli dla tabeli `kategorie`
 --
 
 CREATE TABLE `kategorie` (
@@ -227,7 +227,7 @@ INSERT INTO `kategorie` (`id`, `nazwa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategorie_tresci`
+-- Struktura tabeli dla tabeli `kategorie_tresci`
 --
 
 CREATE TABLE `kategorie_tresci` (
@@ -288,7 +288,7 @@ INSERT INTO `kategorie_tresci` (`id`, `typ_tresci`, `id_tresci`, `id_kategorii`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `komentarze`
+-- Struktura tabeli dla tabeli `komentarze`
 --
 
 CREATE TABLE `komentarze` (
@@ -305,19 +305,23 @@ CREATE TABLE `komentarze` (
 --
 
 INSERT INTO `komentarze` (`id`, `typ_tresci`, `id_tresci`, `nazwa_uzytkownika`, `komentarz`, `polubienia`) VALUES
-(1, 'film', 1, 'user123', 'fajny film', 3),
-(2, 'serial', 1, 'user123', 'fajny serial', 5);
+(1, 'film', 1, 'user123', 'fajny film', 4),
+(2, 'serial', 1, 'user123', 'fajny serial', 5),
+(3, 'film', 1, 'Anonim', 'wzruszający i pełen przemyśleń film ', 1),
+(8, 'film', 5, 'Anonim', ':)', 1),
+(9, 'serial', 5, 'Anonim', 'ok', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oceny`
+-- Struktura tabeli dla tabeli `oceny`
 --
 
 CREATE TABLE `oceny` (
   `id` int(11) NOT NULL,
   `typ_tresci` text NOT NULL,
   `id_tresci` int(11) NOT NULL,
+  `identyfikator_uzytkownika` varchar(64) NOT NULL DEFAULT '',
   `ocena` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -325,14 +329,18 @@ CREATE TABLE `oceny` (
 -- Dumping data for table `oceny`
 --
 
-INSERT INTO `oceny` (`id`, `typ_tresci`, `id_tresci`, `ocena`) VALUES
-(1, 'film', 1, 7),
-(2, 'serial', 1, 8);
+INSERT INTO `oceny` (`id`, `typ_tresci`, `id_tresci`, `identyfikator_uzytkownika`, `ocena`) VALUES
+(6, 'film', 3, 'f4b42e186b12008df0bc7744e39ca6b58701e4226316b1e4e331a3d21b067903', 10),
+(7, 'film', 5, 'f4b42e186b12008df0bc7744e39ca6b58701e4226316b1e4e331a3d21b067903', 7),
+(9, 'film', 6, '59d607884f8a9d42dc2df2764826f00c4c2f19e5b236d552cc5eb806962454e6', 1),
+(10, 'serial', 3, 'f4b42e186b12008df0bc7744e39ca6b58701e4226316b1e4e331a3d21b067903', 10),
+(11, 'serial', 3, '59d607884f8a9d42dc2df2764826f00c4c2f19e5b236d552cc5eb806962454e6', 1),
+(12, 'serial', 5, 'f4b42e186b12008df0bc7744e39ca6b58701e4226316b1e4e331a3d21b067903', 8);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `platformy`
+-- Struktura tabeli dla tabeli `platformy`
 --
 
 CREATE TABLE `platformy` (
@@ -357,7 +365,7 @@ INSERT INTO `platformy` (`id`, `nazwa`, `ikona`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produkcje_rezyserow`
+-- Struktura tabeli dla tabeli `produkcje_rezyserow`
 --
 
 CREATE TABLE `produkcje_rezyserow` (
@@ -401,7 +409,7 @@ INSERT INTO `produkcje_rezyserow` (`id`, `typ_tresci`, `id_tresci`, `id_rezysera
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rezyserzy`
+-- Struktura tabeli dla tabeli `rezyserzy`
 --
 
 CREATE TABLE `rezyserzy` (
@@ -444,7 +452,7 @@ INSERT INTO `rezyserzy` (`id`, `imie`, `nazwisko`, `data_urodzenia`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `seriale`
+-- Struktura tabeli dla tabeli `seriale`
 --
 
 CREATE TABLE `seriale` (
@@ -476,7 +484,7 @@ INSERT INTO `seriale` (`id`, `tytul`, `rok_produkcji`, `ilosc_sezonow`, `opis`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wystepy_aktorow`
+-- Struktura tabeli dla tabeli `wystepy_aktorow`
 --
 
 CREATE TABLE `wystepy_aktorow` (
@@ -543,86 +551,86 @@ INSERT INTO `wystepy_aktorow` (`id`, `typ_tresci`, `id_tresci`, `id_aktora`, `ro
 (49, 'serial', 10, 32, 'Todd Chavez');
 
 --
--- Indexes for dumped tables
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `admin`
+-- Indeksy dla tabeli `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `aktorzy`
+-- Indeksy dla tabeli `aktorzy`
 --
 ALTER TABLE `aktorzy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `dostepnosc_na_platformach`
+-- Indeksy dla tabeli `dostepnosc_na_platformach`
 --
 ALTER TABLE `dostepnosc_na_platformach`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_platformy` (`id_platformy`);
 
 --
--- Indexes for table `filmy`
+-- Indeksy dla tabeli `filmy`
 --
 ALTER TABLE `filmy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kategorie`
+-- Indeksy dla tabeli `kategorie`
 --
 ALTER TABLE `kategorie`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kategorie_tresci`
+-- Indeksy dla tabeli `kategorie_tresci`
 --
 ALTER TABLE `kategorie_tresci`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_kategorii` (`id_kategorii`);
 
 --
--- Indexes for table `komentarze`
+-- Indeksy dla tabeli `komentarze`
 --
 ALTER TABLE `komentarze`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `oceny`
+-- Indeksy dla tabeli `oceny`
 --
 ALTER TABLE `oceny`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `platformy`
+-- Indeksy dla tabeli `platformy`
 --
 ALTER TABLE `platformy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `produkcje_rezyserow`
+-- Indeksy dla tabeli `produkcje_rezyserow`
 --
 ALTER TABLE `produkcje_rezyserow`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_rezysera` (`id_rezysera`);
 
 --
--- Indexes for table `rezyserzy`
+-- Indeksy dla tabeli `rezyserzy`
 --
 ALTER TABLE `rezyserzy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `seriale`
+-- Indeksy dla tabeli `seriale`
 --
 ALTER TABLE `seriale`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `wystepy_aktorow`
+-- Indeksy dla tabeli `wystepy_aktorow`
 --
 ALTER TABLE `wystepy_aktorow`
   ADD PRIMARY KEY (`id`),
@@ -672,13 +680,13 @@ ALTER TABLE `kategorie_tresci`
 -- AUTO_INCREMENT for table `komentarze`
 --
 ALTER TABLE `komentarze`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `oceny`
 --
 ALTER TABLE `oceny`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `platformy`
