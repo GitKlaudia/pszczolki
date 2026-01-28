@@ -211,6 +211,53 @@ class Movie extends Model
     return str_replace($polish, $replace, $str);
 }
 
+public function getUserRating(int $id, string $userIdentifier): ?array
+{
+    $stmt = $this->db->prepare(
+        "SELECT * FROM oceny 
+         WHERE typ_tresci = 'film' AND id_tresci = ? AND identyfikator_uzytkownika = ?"
+    );
+    $stmt->bind_param("is", $id, $userIdentifier);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $rating = $res->fetch_assoc();
+    $stmt->close();
+    return $rating ?: null;
+}
+
+public function addRating(int $id, string $userIdentifier, int $rating): void
+{
+    $stmt = $this->db->prepare(
+        "INSERT INTO oceny (typ_tresci, id_tresci, identyfikator_uzytkownika, ocena) 
+         VALUES ('film', ?, ?, ?)"
+    );
+    $stmt->bind_param("isi", $id, $userIdentifier, $rating);
+    $stmt->execute();
+    $stmt->close();
+}
+
+public function updateRating(int $id, string $userIdentifier, int $rating): void
+{
+    $stmt = $this->db->prepare(
+        "UPDATE oceny 
+         SET ocena = ? 
+         WHERE typ_tresci = 'film' AND id_tresci = ? AND identyfikator_uzytkownika = ?"
+    );
+    $stmt->bind_param("iis", $rating, $id, $userIdentifier);
+    $stmt->execute();
+    $stmt->close();
+}
+
+public function deleteUserRating(int $id, string $userIdentifier): void
+{
+    $stmt = $this->db->prepare(
+        "DELETE FROM oceny 
+         WHERE typ_tresci = 'film' AND id_tresci = ? AND identyfikator_uzytkownika = ?"
+    );
+    $stmt->bind_param("is", $id, $userIdentifier);
+    $stmt->execute();
+    $stmt->close();
+}
 
     
 }

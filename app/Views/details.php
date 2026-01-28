@@ -33,13 +33,16 @@
             Ocena: <?= $rating !== null ? $rating . '/10' : 'Brak ocen'; ?>
         </div>
 
-        <div id="movieRating">
+        <div id="movieRating" data-type="<?= htmlspecialchars($type); ?>" data-id="<?= (int)$item['id']; ?>">
             <div id="movieRatingTitle">Oceń <?= $type === 'film' ? 'film' : 'serial'; ?></div>
             <div id="stars">
                 <?php for ($i = 1; $i <= 10; $i++): ?>
-                    <div class="star" data-value="<?= $i ?>"></div>
+                    <span class="star" data-value="<?= $i ?>"></span>
                 <?php endfor; ?>
             </div>
+            <div id="ratingValue"></div>
+            <button id="submitRatingBtn" disabled>Oceń</button>
+            <button id="deleteRatingBtn" style="display: none;">Usuń ocenę</button>
         </div>
 
         <div id="title">
@@ -171,7 +174,7 @@
                 <p>Brak komentarzy.</p>
             <?php endif; ?>
             <form id="addCommentForm" method="post" action="index.php?controller=details&action=addComment&type=<?= htmlspecialchars($type); ?>&id=<?= (int)$item['id']; ?>">
-                <textarea name="commentText" id="commentText" placeholder="Twój komentarz..." rows="5" cols="40" required maxlength="500"></textarea>
+                <textarea name="commentText" id="commentText" placeholder="Twój komentarz...🐝" rows="5" cols="40" required maxlength="500"></textarea>
                 <br>
                 <button type="submit" id="submitCommentBtn">Skomentuj</button>
             </form>
@@ -231,6 +234,7 @@
 <script src="js/suggestions.js"></script>
 <script src="js/themeToggle.js"></script>
 <script src="js/scroll.js"></script>
+<script src="js/rating.js"></script>
 
 <?php if (isset($msg)): ?>
     <script>
