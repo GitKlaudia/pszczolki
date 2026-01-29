@@ -14,6 +14,19 @@ html, body {
 *, *::before, *::after {
     box-sizing: inherit;
 }
+header.header-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+header {
+    transition: transform 0.3s ease;
+}
+
+header.header-hidden:hover {
+    transform: translateY(0);
+}
+
 
 
 .navItem, #headerTitle {
@@ -186,6 +199,7 @@ header {
 
 
 @media (max-width: 600px) {
+
     header {
         flex-direction: column;
         height: auto;
