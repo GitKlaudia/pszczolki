@@ -378,13 +378,14 @@
 
 #submitCommentBtn {
     background-color: #eaca3f;
-    color: white; 
+    color: rgb(0, 0, 0); 
     border: none;
     cursor: pointer;
     font-weight: bold;
     margin-top: 10px;
     padding: 10px;
     transition: filter 0.2s;
+    font-size: 18px;
 }
 
 #submitCommentBtn:hover {
@@ -392,13 +393,13 @@
 }
 
 @media (max-width: 900px) {
+
     #detailsWrapper {
         display: flex;
         flex-direction: column;
+        margin-top: 220px !important; 
         padding: 15px;
-        margin-top: 80px; 
         gap: 15px;
-        overflow-x: hidden; 
     }
     #searchInput, #mobileSearchInput {
         width: 90% !important; 
@@ -424,6 +425,9 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
+    }
+    .title-text{
+        font-size: 28px!important;
     }
     #year{
         font-size: 28px;
@@ -468,7 +472,6 @@
         text-align: center;
     }
 
-    /* Mobile rating styles */
     #movieRating {
         order: 6;
         text-align: center;
@@ -524,35 +527,41 @@
         white-space: nowrap; 
     }
 
-    #commentsWrapper {
+#commentsWrapper {
         order: 9;
         padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        width: 100%;
     }
 
-    #commentsTitle {
-        text-align: center;
-        font-size: 32px;
-        margin-bottom: 20px;
+    #addCommentForm {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    #commentText {
+        width: 90%; /
     }
 
     .comment {
         display: flex;
-        flex-direction: row;
+        flex-direction: row; 
+        justify-content: center;
         align-items: flex-start;
-        text-align: left;
-        gap: 15px;
-        margin-bottom: 25px;
-    }
-
-    .commentUserAvatar {
-        flex-shrink: 0; 
+        width: 95%;
+        margin: 0 auto 25px auto;
     }
 
     .commentContent {
-        flex: 1; 
-        font-size: 26px;
-        margin: 0;
-    }
+        text-align: left; 
+        font-size: 18px;
+    } 
+    
 
     .commentLikes {
         display: flex;

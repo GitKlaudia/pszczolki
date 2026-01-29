@@ -18,10 +18,10 @@
             <a href="index.php?controller=search&action=index&type=film" class="navItem" id="navMovies">Filmy</a>
             <a href="index.php?controller=search&action=index&type=serial" class="navItem" id="navShows">Seriale</a>
             <a href="index.php?controller=favourites&action=index" class="navItem" id="navFav">Polubione</a>
-            <button id="themeToggle" title="Zmień motyw">
+        </div>
+        <button id="themeToggle" title="Zmień motyw">
                 <img id="themeIcon" src="styles/light.svg" alt="Motyw">
             </button>
-        </div>
     </header>
 
     <div id="detailsWrapper">

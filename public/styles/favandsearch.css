@@ -145,10 +145,12 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
+     #searchWrapper {
+        margin-top: 200px;
+    }
 
    header {
-        position: relative; 
         top: 0;
         height: auto;
         display: flex;
@@ -233,7 +235,7 @@
     }
 
     .title {
-        font-size: 36px; 
+        font-size: 40px; 
         margin: 0;
     }
 
@@ -292,6 +294,7 @@
         font-weight: bold;
         margin-bottom: 20px;
     }
+      
     
 }
 
@@ -324,13 +327,22 @@
     align-items: start;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
+
+     .poster {
+        width: 100%; 
+        max-width: 150px; 
+        height: auto;
+        aspect-ratio: 2 / 3;
+        margin-bottom: 10px;
+    }
+
     #searchWrapper {
         padding: 20px;
     }
 
     #searchTitle {
-        font-size: 28px;
+        font-size: 40px;
         text-align: center;
     }
 

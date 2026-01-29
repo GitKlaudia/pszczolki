@@ -13,7 +13,16 @@
         <img id="headerLogo" src="styles/logo.svg">
         <div id="headerTitle">B-Movie</div>
     </a>
+    <div id="navBar">
+            <a href="index.php?controller=search&action=index&type=film" class="navItem" id="navMovies">Filmy</a>
+            <a href="index.php?controller=search&action=index&type=serial" class="navItem" id="navShows">Seriale</a>
+            <a href="index.php?controller=favourites&action=index" class="navItem" id="navFav">Polubione</a>
+        </div>
+            <button id="themeToggle" title="Zmień motyw">
+                <img id="themeIcon" src="styles/light.svg" alt="Motyw">
+            </button>   
 </header>
+
 
 <div id="searchWrapper">
     <div id="searchTitle">Wyniki wyszukiwania: <?= htmlspecialchars($query); ?></div>
@@ -67,6 +76,6 @@
     <?php endif; ?>
 </div>
 
-<script src="themeToggle.js"></script>
 </body>
+ <script src="js/themeToggle.js"></script>
 </html>

@@ -10,6 +10,7 @@
 #advancedSearchWrapper {
     max-width: 900px;
     margin: 0 auto;
+    margin-top: 80px;
     padding: 60px 20px;
     display: flex;
     flex-direction: column;
@@ -163,4 +164,9 @@
     .castSearchRow {
         flex-direction: column;
     }
+    
+    .searchTag {
+    font-size: 16px;
+}
+
 }
